@@ -1,0 +1,29 @@
+[
+  {'Name': 'Van Gel B (RT Vanderbit)', 'Target_Base': 0.93, 'Code': 'RM0416', 'Type': 'Fixed', 'theo_qty': 93.0, 'actual_qty': 0},
+  {'Name': 'Morwet D- 425', 'Target_Base': 1.39, 'Code': 'RM0414', 'Type': 'Combination', 'theo_qty': 138.99999999999997, 'actual_qty': 0},
+  {'Name': 'Trespres2020', 'Target_Base': 1.39, 'Code': 'RT0418', 'Type': 'Combination'},
+  {'Name': 'SAG 1572 - Momentive', 'Target_Base': 0.25, 'Code': 'RS0434', 'Type': 'Combination', 'theo_qty': 25.0, 'actual_qty': 0},
+  {'Name': 'Atlox 3772', 'Target_Base': 0.25, 'Code': 'RA0406', 'Type': 'Combination'},
+  {'Name': 'Ethylan NS 500 LQ', 'Target_Base': 1.85, 'Code': 'RE0052', 'Type': 'Fixed', 'theo_qty': 185.0, 'actual_qty': 0},
+  {'Name': 'Atlox 4913', 'Target_Base': 2.78, 'Code': 'RA0405', 'Type': 'Combination', 'theo_qty': 277.99999999999994},
+  {'Name': 'Teresperse2500', 'Target_Base': 2.78, 'Code': 'RT0437', 'Type': 'Combination', 'actual_qty': 0},
+  {'Name': 'Propylene Glycol', 'Target_Base': 8.11, 'Code': 'RP0415', 'Type': 'Fixed', 'theo_qty': 811.0, 'actual_qty': 0},
+  {'Name': 'Proxel GXL', 'Target_Base': 0.09, 'Code': 'RP0421', 'Type': 'Fixed', 'theo_qty': 9.0, 'actual_qty': 0},
+  {'Name': 'Agrhopol 23 W', 'Target_Base': 0.24, 'Code': 'RX0001', 'Type': 'Fixed', 'theo_qty': 24.0, 'actual_qty': 0},
+  {'Name': 'DM Water', 'Target_Base': 0, 'Code': 'RS0424', 'Type': 'Solvent', 'theo_qty': 0.0, 'actual_qty': 0}
+]
+
+[
+  {'Name': 'Van Gel B (RT Vanderbit)', 'Target_Base': 0.93, 'Code': 'RM0416', 'Type': 'Fixed', 'theo_qty': 111.6, 'actual_qty': 0},
+  {'Name': 'Morwet D- 425', 'Target_Base': 1.39, 'Code': 'RM0414', 'Type': 'Combination', 'theo_qty': 166.8, 'actual_qty': 0},
+  {'Name': 'Trespres2020', 'Target_Base': 1.39, 'Code': 'RT0418', 'Type': 'Combination'},
+  {'Name': 'SAG 1572 - Momentive', 'Target_Base': 0.25, 'Code': 'RS0434', 'Type': 'Combination', 'theo_qty': 30.0, 'actual_qty': 0},
+  {'Name': 'Atlox 3772', 'Target_Base': 0.25, 'Code': 'RA0406', 'Type': 'Combination'},
+  {'Name': 'Ethylan NS 500 LQ', 'Target_Base': 1.85, 'Code': 'RE0052', 'Type': 'Fixed', 'theo_qty': 222.0, 'actual_qty': 0},
+  {'Name': 'Atlox 4913', 'Target_Base': 2.78, 'Code': 'RA0405', 'Type': 'Combination'},
+  {'Name': 'Teresperse2500', 'Target_Base': 2.78, 'Code': 'RT0437', 'Type': 'Combination', 'actual_qty': 0, 'theo_qty': 333.6},
+  {'Name': 'Propylene Glycol', 'Target_Base': 8.11, 'Code': 'RP0415', 'Type': 'Fixed', 'theo_qty': 973.2, 'actual_qty': 0},
+  {'Name': 'Proxel GXL', 'Target_Base': 0.09, 'Code': 'RP0421', 'Type': 'Fixed', 'theo_qty': 10.8, 'actual_qty': 0},
+  {'Name': 'Agrhopol 23 W', 'Target_Base': 0.24, 'Code': 'RX0001', 'Type': 'Fixed', 'theo_qty': 28.8, 'actual_qty': 0},
+  {'Name': 'DM Water', 'Target_Base': 0, 'Code': 'RS0424', 'Type': 'Solvent', 'theo_qty': 0.0, 'actual_qty': 0}
+]

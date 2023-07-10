@@ -1,0 +1,879 @@
+<!doctype html>
+{% load static %}
+
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon2.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+        <!-- start password validation -->
+        <script>
+            function validateForm() {
+            //collect form data in JavaScript variables
+            var pw1 = document.getElementById("password").value;
+            var pw2 = document.getElementById("reenterpassword").value;
+
+            if(pw1 != pw2) {
+            document.getElementById("passwordmsg").innerHTML = "**Passwords are not same";
+            return false;
+            }
+
+            }
+
+        </script>
+        <!-- end password validation -->
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Profile</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+
+                                            <li class="breadcrumb-item active">User Profile</li>
+
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <!-- add and edit buttons -->
+                            <div class="card-header">
+                                <div style="float: right;">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target="#edit">Edit User
+                                    </button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target="#register">Add User
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- edit popup -->
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                aria-hidden="true" id="edit">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit User</h5>
+                                            <button type="button" class="btn-close"
+                                                style="padding: 0rem 2rem; width: 2px"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                             {# url 'user-update' #}
+                                            <form method="POST" action="#" id="edit-form" class="needs-validation" novalidate>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="id" id="uid">
+                                                <div data-repeater-list="outer-group" class="outer">
+                                                    <div data-repeater-item class="outer">
+                                                        <!-- start form field -->
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 ">UserName</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="Editusername" id="editusername" onchange="showuserdata(this.value)" required>
+                                                                    <option value="" selected disabled>Select Username</option>
+                                                                    {%for item in users_list%}
+                                                                    <option>{{item.Username}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom10">Name</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="Editname" id="editname" value="" placeholder="Enter Name" id="validationCustom10"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom11">Password</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="password" name="Editpassword" value="" id="editpassword" placeholder="Enter Password" id="validationCustom11"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom12">Re-enter Password</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name = "Editreenterpassword" value=""  id="editreenterpassword" placeholder="Re-enter Password" id="validationCustom12"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom13">Role</label>
+                                                            <div class="col-lg-8">
+
+                                                                <select class="form-select" name="Editrole" id="editrole" id="validationCustom13"  required>
+                                                                    <option value="" selected disabled>Select Role</option>
+                                                                    <option>Operator</option>
+                                                                    <option>Shift Incharge</option>
+                                                                    <option>Line Incharge</option>
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom14">Shift</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="Editshift" id="editshift" id="validationCustom14"  required>
+                                                                    <option value="" selected disabled>Select Shift</option>
+                                                                    <option>M</option>
+                                                                    <option>E</option>
+                                                                    <option>A</option>
+                                                                    <option>B</option>
+                                                                    <option>A</option>
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom15">Status</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="Editstatus" id="editstatus" id="validationCustom15"  required>
+                                                                    <option value="" selected disabled>Select Status</option>
+                                                                    <option>Active</option>
+                                                                    <option>Inactive</option>
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom16">Plant</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name = "Editplant" id="editplant" value="" placeholder="Enter Plant" id="validationCustom16"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom17">Line</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name = "Editline" id="editline" value="" placeholder="Enter Line" id="validationCustom17"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end form field -->
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-lg-12">
+                                                        <div style="float: right;">
+                                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Edit</button> &nbsp;&nbsp;
+                                                            <button class="btn btn-primary waves-effect waves-light" type="submit" onclick="clearEdit()">Clear</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+
+                            <!-- register popup -->
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                aria-hidden="true" id="register">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Add User</h5>
+                                            <button type="button" class="btn-close"
+                                                style="padding: 0rem 2rem; width: 2px"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form method="POST" action="{% url 'create_user' %}" id="add-form" class="needs-validation" novalidate>
+                                                {% csrf_token %}
+                                                <div data-repeater-list="outer-group" class="outer">
+                                                    <div data-repeater-item class="outer">
+                                                        <!-- start form field -->
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom01">Name</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name="Name" id="name" placeholder="Enter Name" id="validationCustom01"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom02">UserName</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="text" name = "Username" id="username" placeholder="Enter UserName" id="validationCustom02"  required>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom03">Password</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="password" name="Password" value="" id="password" placeholder="Enter Password" id="validationCustom03"  required>
+                                                                <div class="valid-feedback" >
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback" >
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom04">Re-enter Password</label>
+                                                            <div class="col-lg-8">
+                                                                <input class="form-control" type="password" name = "Reenterpassword" value="" id="reenterpassword" onkeyup="return validateForm()" placeholder="Re-enter Password" id="validationCustom04"  required>
+                                                                <div class="valid-feedback" id="passwordmsg">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom05">Role</label>
+                                                            <div class="col-lg-8">
+
+                                                                <select class="form-select" name="User_Role" id="role" type="select" id="validationCustom05"  required>
+                                                                    <option value="" selected disabled>Select Role</option>
+                                                                    <option>Operator</option>
+                                                                    <option>Shift Incharge</option>
+                                                                    <option>Line Incharge</option>
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom06">Shift</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="Shift" id="shift" type="select" id="validationCustom06"  required>
+                                                                    <option value="" selected disabled>Select Shift</option>
+                                                                    {%for item in shift_list%}
+                                                                    <option>{{item}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom07">Status</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="Status" id="status" type="select" id="validationCustom07"  required>
+                                                                    <option value="" selected disabled>Select Status</option>
+                                                                    <option>Active</option>
+                                                                    <option>Inactive</option>
+                                                                </select>
+                                                                <div class="valid-feedback">
+                                                                    Looks good!
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Looks bad!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom08">Plant</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="plant_name" id="plant_name" type="select" id="validationCustom08"  required>
+                                                                    <option value="" selected disabled>Select Plant</option>
+                                                                    {%for item in plant_list.PlantName%}
+                                                                    <option>{{item}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4 form-label" for="validationCustom09">Line</label>
+                                                            <div class="col-lg-8">
+                                                                <select class="form-select" name="line_name" id="line_name" type="select" id="validationCustom09"  required>
+                                                                    <option value="" selected disabled>Select Plant</option>
+                                                                    {%for item in plant_list.LineDetails%}
+                                                                    <option>{{item}}</option>
+                                                                    {%endfor%}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end form field -->
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-lg-12">
+                                                        <div style="float: right;">
+                                                            <button class="btn btn-primary waves-effect waves-light" type="submit">Add</button>
+                                                            <button class="btn btn-primary waves-effect waves-light" type="button" onclick="clearAdd()">Clear</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
+                            <!-- Modal starts -->
+                            <!--
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                id="modal-add" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Verify Admin</h5>
+                                            <button type="button" class="btn-close"
+                                                style="padding: 0rem 2rem; width: 2px"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="alert_placeholder"></div>
+                                            <form class="needs-validation-add" novalidate>
+                                                <div data-repeater-list="outer-group" class="outer">
+                                                    <div data-repeater-item class="outer">
+
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" name="V-username"
+                                                                id="v-add-username" placeholder="Enter Username" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                            <div class="col-lg-8">
+                                                                <input type="password" class="form-control" name="V-password"
+                                                                id="v-add-password" placeholder="Enter Password" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row mb-4">
+                                                            <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" name="Comments"
+                                                                id="comments" placeholder="Enter Comments" required>
+                                                                <div class="valid-feedback"></div>
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-lg-10">
+                                                        <button type="submit" style="float: right;"
+                                                            class="btn btn-primary" id="submit-form">Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                            <!-- /.modal -->
+
+
+                            <div class="card">
+                                <div class="card-body">
+
+                                        <div class="table-responsive">
+                                            <h4 class="card-title">User List</h4>
+                                            <table class="table table-editable table-nowrap align-middle table-edits">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>User Name</th>
+                                                        <th>Shift</th>
+                                                        <th>Role</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item in users_list %}
+                                                    <tr>
+                                                        <td>{{item.Name}}</td>
+                                                        <td>{{item.Username}}</td>
+                                                        <td>{{item.Shift}}</td>
+                                                        <td>{{item.User_Role}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                {% include 'footer.html' %}
+
+                </div>
+            <!-- end main content-->
+
+            </div>
+        <!-- END layout-wrapper -->
+        </div>
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <!-- pristine js -->
+        <script src="{% static 'libs/pristinejs/pristine.min.js' %}"></script>
+
+        <!-- Alert init js -->
+        <script src="{% static 'js/pages/alert.init.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+                <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: true,
+                    scrollX: true,
+                    initComplete: function () {
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+                    },
+                });
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+
+        <!-- clear form -->
+        <script>
+            function clearAdd() {
+                document.getElementById("add-form").reset();
+            }
+        </script>
+
+        <!-- clear form -->
+        <script>
+            function clearEdit() {
+                document.getElementById("edit-form").reset();
+            }
+        </script>
+
+         <!--
+         <script>
+            $("#username").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                // $(this).attr("data-uid");
+                console.log("UPdatebtn pREsseS",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/user-update-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        document.getElementById("uid").value = r[0].id;
+                        document.getElementById("username").value = r[0].name;
+                        document.getElementById("password").value = r[0].password;
+                        document.getElementById("group-name").value = r[0].grp_name;
+                        document.getElementById("department-name").value = r[0].dep_name;
+                        document.getElementById("status1").value = r[0].status;
+                        document.getElementById("password-change").value = r[0].cpassword;
+                    }
+                });
+            });
+        </script>
+        -->
+        <!-- <script>
+            !function(){
+                "use strict";
+                window.addEventListener("load",function(){
+                    var e=document.getElementsByClassName("needs-validation");
+                    Array.prototype.filter.call(e,function(t){
+                        t.addEventListener("submit",function(e){
+                            !1===t.checkValidity()&&(e.preventDefault(),e.stopPropagation()),
+                            t.classList.add("was-validated")
+                            // if (document.getElementsByClassName("form-control").length + document.getElementsByClassName("form-select").length-2 == 4) {
+                            // if ($(".invalid-feedback:visible").length == 0) {
+                            //     $('#modal').modal('show');
+                            // }
+                        },!1)
+                    })
+                },!1)
+            }()
+        </script> -->
+
+        <!-- <script>
+            $("#submit-form").on('click', function(evt) {
+            // .addEventListener("click", function(evt) {
+                if ($(".invalid-feedback:visible").length == 0) {
+                    alert('Ajax called')
+                    $.ajax ({
+                        method: "POST",
+                        url: `/verify-admin/`,
+                        data: {
+                            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[1].value,
+                            user: document.getElementById('v-username').value,
+                            pass: document.getElementById('v-password').value,
+                        },
+                        success: function(response) {
+                            alert('Success')
+                            r = response.data;
+                            console.log(r);
+                            if (r.valid == "YES") {
+                                alert('Yes')
+                            }
+                            else {
+                                alert('No')
+                                evt.preventDefault();
+                                evt.stopPropagation();
+                            }
+                        }
+                    })
+                }
+            })
+        </script> -->
+
+            <!--
+        <script>
+            !function ()
+            {
+                "use strict";
+                window.addEventListener("load", function ()
+                {
+                    var e = document.getElementsByClassName("needs-validation-add");
+                    Array.prototype.filter.call(e, function (t)
+                    {
+                        console.log('add function')
+                        t.addEventListener("submit", function (e)
+                        {
+                            !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                            if ($(".invalid-feedback:visible").length == 0 && !$('#modal-add').hasClass('show')) {
+                                $('#modal-add').modal('show') && (e.preventDefault(), e.stopPropagation());
+                                $('#register').modal('hide');
+                            }
+                            else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal-add').hasClass('show')) {
+                                e.preventDefault(), e.stopPropagation()
+                                // $("#submit-form").on('click', function() {
+                                    if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
+                                        $.ajax ({
+                                            method: "POST",
+                                            url: `/verify-admin/`,
+
+                                            data: {
+                                                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[1].value,
+                                                user: document.getElementById('v-add-username').value,
+                                                pass: document.getElementById('v-add-password').value,
+                                            },
+                                            success: function(response) {
+                                                // r = response.data;
+                                                // console.log(r);
+                                                if (response.data.valid == "YES") {
+                                                    $("#add-form").trigger('submit', [true]);
+                                                }
+                                                else {
+                                                    e.preventDefault(), e.stopPropagation()
+                                                    $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                                }
+                                            }
+                                        })
+                                    }
+                                // })
+                            }
+                            else {
+                                e.preventDefault(), e.stopPropagation()
+                            }
+                        }, !1)
+                    })
+                }, !1)
+            }()
+        </script>
+
+        <script>
+            !function ()
+            {
+                "use strict";
+                window.addEventListener("load", function ()
+                {
+                    var e = document.getElementsByClassName("needs-validation-edit");
+                    Array.prototype.filter.call(e, function (t)
+                    {
+                        t.addEventListener("submit", function (e)
+                        {
+                            !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                            if ($(".invalid-feedback:visible").length == 0 && !$('#modal-edit').hasClass('show')) {
+                                $('#modal-edit').modal('show') && (e.preventDefault(), e.stopPropagation());
+                                $('#edit').modal('hide');
+                            }
+                            else if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0 && $('#modal-edit').hasClass('show')) {
+                                e.preventDefault(), e.stopPropagation()
+                                // $("#submit-form").on('click', function() {
+                                    if ($(".invalid-feedback:visible").length == 0 && $(".valid-feedback:visible").length > 0) {
+                                        $.ajax ({
+                                            method: "POST",
+                                            url: `/verify-admin/`,
+
+                                            data: {
+                                                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                                                user: document.getElementById('v-edit-username').value,
+                                                pass: document.getElementById('v-edit-password').value,
+                                            },
+                                            success: function(response) {
+                                                // r = response.data;
+                                                // console.log(r);
+                                                if (response.data.valid == "YES") {
+                                                    $("#edit-form").trigger('submit', [true]);
+                                                }
+                                                else {
+                                                    e.preventDefault(), e.stopPropagation()
+                                                    $('#alert_placeholder').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">Invalid Admin Credentials!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+                                                }
+                                            }
+                                        })
+                                    }
+                                // })
+                            }
+                            else {
+                                e.preventDefault(), e.stopPropagation()
+                            }
+                        }, !1)
+                    })
+                }, !1)
+            }()
+        </script>
+        -->
+    <!-- ajax code start -->
+   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>-->
+     <script type="text/javascript" src="{% static 'js/ajax.js' %}"> </script>
+    <script>
+function showuserdata(str) {
+
+ $.ajax({
+     url: "profile",
+     data: {"username":str},
+     method: "GET",
+     success: function(result) {
+
+
+          console.log(result);
+          document.getElementById("editname").value = result.Username;
+          document.getElementById("editpassword").value = result.Password;
+          document.getElementById("editreenterpassword").value = result.Password;
+          document.getElementById("editrole").value = result.User_Role;
+          document.getElementById("editshift").value = result.Shift;
+          document.getElementById("editstatus").value = result.Status;
+          document.getElementById("editplant").value = result.plant_name;
+          document.getElementById("editline").value = result.line_name;
+
+
+
+          }
+          });
+          }
+
+
+</script>
+
+
+
+
+    </body>
+</html>

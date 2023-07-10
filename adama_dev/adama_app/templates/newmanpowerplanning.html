@@ -1,0 +1,598 @@
+<!doctype html>
+{% load static %}
+
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon2.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+
+         <!-- choices css -->
+        <link href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Manpower Planning</h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/manpowerplanning">View</a></li>
+                                            <li class="breadcrumb-item active"> Create Manpower Planning</li>
+
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Start -->
+                        <form method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                         <div class="row">
+                            <div class="col-12">
+
+
+                                        <!-- card 1 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                 <!-- row 1 Start -->
+                                                 <div class="row">
+                                                    <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-2">
+                                                              <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Date</label>
+
+                                                                    <input type="text" class="form-control" readonly value="{{today_date}}" name="createddate">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-2">
+                                                              <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label form-label" for="validationCustom01">Shift</label>
+
+                                                                    <select class="form-select form-control" name="shift" type="select"  id="validationCustom01"  required>
+                                                                        <option value="">Select</option>
+                                                                        {%for item in shift_list%}
+                                                                        <option value="{{item}}">{{item}}</option>
+                                                                        {%endfor%}
+                                                                    </select>
+                                                                     <div class="valid-feedback">
+                                                                        Looks good!
+                                                                      </div>
+                                                                      <div class="invalid-feedback">
+                                                                        Please Select Shift.
+                                                                      </div>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-2">
+                                                               <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label form-label" for="validationCustom02">Day</label>
+
+                                                                    <input class="form-control" type="date" name="allotteddate" id="validationCustom02"  required>
+                                                                     <div class="valid-feedback">
+                                                                        Looks good!
+                                                                      </div>
+                                                                      <div class="invalid-feedback">
+                                                                        Please Select Date.
+                                                                      </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 </div>
+                                                 <!-- row 1End -->
+                                                 <!-- row 2 Start -->
+                                                 <div class="row">
+                                                 <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-12">
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="row mb-4">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-6 col-form-label form-label" for="validationCustom03">Contractor</label>
+
+                                                                                <select class="form-select form-control" name = "contractor" type="select"  id="validationCustom03"  required>
+                                                                                    <option value="">Select</option>
+                                                                                    {%for item in plant_list.ContractorDetails%}
+                                                                                    <option value="{{item}}">{{item}}</option>
+                                                                                    {%endfor%}
+                                                                                </select>
+                                                                                <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    Please Select Contractor.
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-4">
+                                                                        <div class="row mb-3">
+                                                                             <div class="col-sm-12">
+                                                                                <label class="col-sm-8 col-form-label form-label" for="validationCustom04">Allotment</label>
+                                                                                <select class="form-select form-control" name = "allotment" type="select"  id="validationCustom04"  required>
+                                                                                    <option value="">Select</option>
+                                                                                    {%for item in plant_list.AllotmentDetails%}
+                                                                                    <option value="{{item}}">{{item}}</option>
+                                                                                    {%endfor%}
+                                                                                </select>
+                                                                                <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    Please Select Allotment.
+                                                                                </div>
+                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="row mb-3">
+                                                                                <div class="col-sm-12">
+                                                                                    <label class="col-sm-8 col-form-label form-label" for="validationCustom05">No. Of Allotment</label>
+
+                                                                                    <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="noofallotment" id="validationCustom05"  required>
+                                                                                    <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Please Enter Number of Allotment.
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                 <div class="row">
+                                                                     <div class="col-lg-4">
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-10 col-form-label form-label" for="plantname">Plant</label>
+
+                                                                                 <!--<select class="form-select form-control" name="plant" type="select"  id="validationCustom06"  required>
+                                                                                    <option value="">Select</option>
+                                                                                     {%for item in plant_list.PlantName%}
+                                                                                    <option value="{{item}}">{{item}}</option>
+                                                                                     {%endfor%}
+                                                                                 </select>-->
+                                                                                <select class="form-control" data-trigger name="plant" id="plantname" placeholder="Search">
+                                                                                <option value="">Search</option>
+                                                                                <option value="Herbicide 1">Herbicide 1</option>
+                                                                                <option value="Insecticide 1">Insecticide 1</option>
+                                                                                <option value="Insecticide 2">Insecticide 2</option>
+                                                                                <option value="WDG">WDG</option>
+                                                                                <option value="NIMITZ">NIMITZ</option>
+                                                                            </select>
+                                                                                 <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                        Please Select Plant.
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                     <div class="col-lg-4">
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-10 col-form-label form-label" for="linenumber">Line No.</label>
+                                                                                  <select class="form-control" data-trigger name="linenumber" id="linenumber" placeholder="Search">
+                                                                                            <option value="">Search</option>
+                                                                                            <option value="FM301">FM301</option>
+                                                                                            <option value="FM302">FM302</option>
+                                                                                            <option value="FM303">FM303</option>
+                                                                                            <option value="FM304">FM304</option>
+                                                                                            <option value="FM305">FM305</option>
+                                                                                            <option value="FM306">FM306</option>
+                                                                                            <option value="FM401">FM401</option>
+                                                                                            <option value="FM402">FM402</option>
+                                                                                            <option value="FM101">FM101</option>
+                                                                                            <option value="FM102">FM102</option>
+                                                                                            <option value="FM103">FM103</option>
+                                                                                            <option value="FM104">FM104</option>
+                                                                                            <option value="FM105">FM105</option>
+                                                                                            <option value="FM701">FM701</option>
+                                                                                            <option value="FM702">FM702</option>
+                                                                                            <option value="FM703">FM703</option>
+                                                                                            <option value="FM801-A">FM801-A</option>
+                                                                                            <option value="FM801-B">FM801-B</option>
+                                                                                            <option value="FM801-C">FM801-C</option>
+                                                                                            <option value="FM801-D">FM801-D</option>
+                                                                                            <option value="FM404">FM404</option>
+                                                                                            <option value="FM1001">FM1001</option>
+                                                                                            <option value="FM901">FM901</option>
+                                                                                        </select>
+                                                                                 <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                        Please Select Plant.
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                     <div class="col-lg-4">
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-10 col-form-label form-label" for="box">No. Of Boxes</label>
+
+                                                                                  <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="box" id="box" >
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                 </div>
+
+                                                         </div>
+
+                                                     </div>
+                                                 </div>
+                                                 </div>
+                                                 <!-- row 2 End -->
+
+                                            </div>
+                                        </div>
+                                        <!-- card 1 end -->
+
+
+                                        <!-- button Start -->
+                                        <div class="card">
+
+                                            <!-- Card Body Start -->
+                                            <div class="card-body p-4">
+                                                     <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-2">
+                                                                 <button type="submit" class="btn btn-success w-md" >Submit</button>
+                                                         </div>
+                                                         </br>
+                                                         <div class="col-lg-2">
+
+                                                         </div></br>
+                                                          <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+
+                                                     </div>
+                                             </div>
+                                        </div>
+                                            </div>
+                                            <!-- Card Body Start -->
+                                        </div>
+                                        <!-- button End -->
+
+
+                            </div> <!-- end col -->
+                        </div>
+                            <!-- Modal starts -->
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                            id="modal" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Verify Admin</h5>
+                                        <button type="button" class="btn-close"
+                                            style="padding: 0rem 2rem; width: 2px"
+                                            data-bs-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div data-repeater-list="outer-group" class="outer">
+                                            <div data-repeater-item class="outer">
+                                                <div class="row mb-3">
+                                                        <div class="col-sm-12">
+                                                            <label class="col-sm-8 col-form-label " >Are You Sure?</label>
+
+                                                        </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                            <div class="col-lg-10">
+                                                <button type="submit" style="float: right;" class="btn btn-primary" id="submit-btn" name="form1">Submit </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                            <!-- /.modal end -->
+                        </form>
+                        <!-- Form End -->
+
+
+
+
+                    </div>
+                </div>
+
+                {% include 'footer.html' %}
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <!-- pristine js -->
+        <script src="{% static 'libs/pristinejs/pristine.min.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+
+            <!-- choices js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- init js -->
+        <script src="{% static 'js/pages/form-advanced.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+        <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+            <!-- category select -->
+            function updateBrands(data){
+                    console.log(data);
+                    product_cat = $('#product_category').val();
+                    console.log("Output:",product_cat);
+
+                   $('#brand_name')
+                                .find('option')
+                                .remove()
+                                .end()
+                                .append('<option value="">Select</option>');
+
+                    data.forEach(d =>{
+                        if(d.product_category == product_cat){
+                            $('#brand_name').append('<option value="'+d.Brand_Name+'">'+d.Brand_Name+'</option>')
+                       }
+                     })
+               }
+        </script>
+        <!-- model popup js start-->
+        <script>
+            !function ()
+            {
+                "use strict";
+                window.addEventListener("load", function ()
+                {
+                    var e = document.getElementsByClassName("needs-validation");
+                    Array.prototype.filter.call(e, function (t)
+                    {
+                        $('button[type=submit]').on('click', function() {
+                            // alert('Hello')
+                            t.addEventListener("submit", function (e)
+                            {
+                                !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                                if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
+                                    $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                                }
+                            }, !1)
+                        })
+                    })
+                }, !1)
+            }(),
+            window.onload=function(){
+                var e=document.getElementById("pristine-valid-example"), t=new Pristine(e);
+                e.addEventListener("submit",function(e){
+                    e.preventDefault();
+                    t.validate()
+                });
+                var n=document.getElementById("pristine-valid-common"), i=new Pristine(n);
+                n.addEventListener("submit",function(e){
+                    e.preventDefault();
+                    i.validate()
+                });
+                var e=document.getElementById("pristine-valid-specificfield"), a=new Pristine(e), n=document.getElementById("specificfield");
+                a.addValidator(n,function(e,t){
+                    return!(!e.length||e[0]!==e[0].toUpperCase())
+                },"The first character must be capitalized",2,!1),
+                e.addEventListener("submit",function(e){e.preventDefault();a.validate()})
+            };
+        </script>
+        <!-- model popup js end-->
+
+
+    </body>
+</html>

@@ -1,0 +1,198 @@
+{% load static %}
+
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
+        <div id="sidebar-menu">
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <!-- Master Settings -->
+                {%if "formulation_module" in user_permissions %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-food-menu"></i>
+                        <span data-key="t-ecommerce">Batch Cards</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'batchcard' %}" data-key="t-products">View</a></li>
+                        {%if "create_batchcard" in user_permissions %}
+                        <li><a href="{% url 'newbatchcard' %}" data-key="t-product-detail">Create</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+                {%endif%}
+                {%if "packaging_module" in user_permissions %}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-package"></i>
+                        <span data-key="t-ecommerce">Packaging</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+
+                        <li><a href="/packaging" data-key="t-packaging">View</a></li>
+
+                        {%if "create_package" in user_permissions %}
+                        <li><a href="/newplanpackaging" data-key="t-packaging-detail">Create</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+                {%endif%}
+                <!-- multilevel menu start -->
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="trello"></i>
+                        <span data-key="t-multi-level">Production Status</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <!--<li><a href="javascript: void(0);" data-key="t-level-1-1">Level 1.1</a></li>-->
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow" data-key="t-level-1-2">Herbicide Plant</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM301.gdfx" data-key="t-level-2-1" target="_blank">FM301</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM302.gdfx" data-key="t-level-2-2" target="_blank">FM302</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM303.gdfx" data-key="t-level-2-3" target="_blank">FM303</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM304.gdfx" data-key="t-level-2-4" target="_blank">FM304</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM305.gdfx" data-key="t-level-2-5" target="_blank">FM305</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM306.gdfx" data-key="t-level-2-6" target="_blank">FM306</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM401.gdfx" data-key="t-level-2-7" target="_blank">FM401</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM402.gdfx" data-key="t-level-2-8" target="_blank">FM402</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM403.gdfx" data-key="t-level-2-8" target="_blank">FM403</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow" data-key="t-level-1-3">Insecticide 1 Plant</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide1%20Line%20101.gdfx" data-key="t-level-3-1" target="_blank">FM101</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide1%20Line%20102.gdfx" data-key="t-level-3-2" target="_blank">FM102</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide1.gdfx" data-key="t-level-3-3" target="_blank">FM103</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide1%20Line%20104.gdfx" data-key="t-level-3-4" target="_blank">FM104</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow" data-key="t-level-1-4">Insecticide 2 Plant</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2.gdfx" data-key="t-level-4-1" target="_blank">FM701</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM702.gdfx" data-key="t-level-4-2" target="_blank">FM702</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM703.gdfx" data-key="t-level-4-3" target="_blank">FM703</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM801%20A.gdfx" data-key="t-level-4-4" target="_blank">FM801 A</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM801%20B.gdfx" data-key="t-level-4-5" target="_blank">FM801 B</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM801%20C.gdfx" data-key="t-level-4-6" target="_blank">FM801 C</a></li>
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2%20FM801%20D.gdfx" data-key="t-level-4-7" target="_blank">FM801 D</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow" data-key="t-level-1-5">WDG/NIMITZ Plant</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="http://192.168.232.238/anyglass/PubDisplay/WDG-NIMITZ.gdfx" data-key="t-level-5-1" target="_blank">WDG</a></li>
+                                <li><a href="javascript: void(0);" data-key="t-level-5-2" target="_blank">NIMITZ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!-- multilevel menu end -->
+                <!--<li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="trello"></i>
+                        <span data-key="t-ecommerce">Production Status</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="http://192.168.232.238/anyglass/PubDisplay/Herbicide%20Line%20FM301.gdfx" target="_blank">Herbicide Plant</a></li>
+                        <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide1.gdfx"  target="_blank">Insecticide 1 Plant</a></li>
+                        <li><a href="http://192.168.232.238/anyglass/PubDisplay/Insecticide2.gdfx"  target="_blank">Insecticide 2 Plant</a></li>
+                        <li><a href="http://192.168.232.238/anyglass/PubDisplay/WDG-NIMITZ.gdfx" target="_blank">WDG/NIMITZ Plant</a></li>
+                    </ul>
+                </li>-->
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-list-check"></i>
+                        <span data-key="t-ecommerce">Tasks</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/task" data-key="t-products">View</a></li>
+                        {%if "create_task" in user_permissions %}
+                        <li><a href="/create_task" data-key="t-product-detail">Create</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-wrench"></i>
+                        <span data-key="t-ecommerce">Maintenance</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/maintenance" data-key="t-products">View</a></li>
+                        {%if "create_maintenance" in user_permissions %}
+                        <li><a href="/planmaintenance" data-key="t-product-detail">Create</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-selection"></i>
+                        <span data-key="t-ecommerce">SOPS</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'view_sop' %}" data-key="t-products">View</a></li>
+                        <li><a href="{% url 'create_sop' %}" data-key="t-product-detail">Create</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-bell"></i>
+                        <span data-key="t-ecommerce">Alarms/Alerts</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/alerts" data-key="t-products">Alarms</a></li>
+                        <li><a href="#" data-key="t-product-detail">Alerts</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-user"></i>
+                        <span data-key="t-ecommerce">Profiles</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'profile' %}" data-key="t-products">User Profile</a></li>
+                        <li><a href="{% url 'group' %}" data-key="t-product-detail">User Roles</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class=" bx bx-group"></i>
+                        <span data-key="t-ecommerce">Manpower Planning</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="/manpowerplanning" data-key="t-products">View</a></li>
+                        <li><a href="/newmanpowerplanning" data-key="t-product-detail">Create</a></li>
+                    </ul>
+                </li>
+                <!--
+                 <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bxs-factory"></i>
+                        <span data-key="t-ecommerce">Production Planning</span>
+                    </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="/productionplanning" data-key="t-products">View</a></li>
+                         <li><a href="/newproductionplanning" data-key="t-product-detail">Create</a></li>
+                     </ul>
+                </li>
+                -->
+
+                 <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-spreadsheet"></i>
+                        <span data-key="t-ecommerce">Reports</span>
+                    </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="http://192.168.232.238/anyglass/PubDisplay/Reports.gdfx" target="_blank" data-key="t-products">Production Report</a></li>
+
+                     </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

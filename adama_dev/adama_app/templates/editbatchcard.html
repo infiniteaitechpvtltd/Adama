@@ -1,0 +1,662 @@
+<!doctype html>
+{% load static %}
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard | ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon1.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+    <!-- <body data-layout="horizontal"> -->
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+            {% include 'sidebar-base.html' %}
+            {% include 'navbar-base.html' %}
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Edit Batch Card</h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+                                            <li class="breadcrumb-item active"><a href="/batchcard">View</a></li>
+                                            <li class="breadcrumb-item active">Edit Batchcard</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Start -->
+                        <form method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- card 1 start -->
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <!-- row 1 Start -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-6 col-form-label">Shift</label>
+                                                                    <input type="text" class="form-control" readonly value="{{display_list.ShiftName}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-3 col-form-label">Date</label>
+                                                                    <input type="text" class="form-control" readonly  value="{{display_list.Created_Date}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card 1 end -->
+
+                                    <!-- card 2 start -->
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <!-- row 1 Start -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <!-- Batch Car No -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-6 col-form-label">Batch Card No.</label>
+                                                                    <input  type="text" class="form-control" readonly name="batchcarno" value = {{display_list.BatchCardNo}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Batch Name -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-6 col-form-label">Brand Name</label>
+                                                                    <input  type="text" class="form-control" readonly  id="brand_name" name="brand_name" value = {{display_list.Brand_Name}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Batch Size -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-6 col-form-label form-label" for="validationCustom01">Batch Size</label>
+                                                                    <input  type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" id="batch_size" name="batch_size" value = {{display_list.Batch_Size}} onkeyup="calculate_thqty()" id="validationCustom01" required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">Please Enter Batch Size.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <!-- SAP Code -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-8 col-form-label">SAP Code</label>
+                                                                    <input type="text" class="form-control" readonly name="SAP_Code" value = {{display_list.SAP_Code}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- MFG Date -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-10 col-form-label">MFG Date</label>
+                                                                    <input type="text" class="form-control" readonly name="MFG_Date" value = {{display_list.MFG_Date}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Expiry Date -->
+                                                        <div class="col-lg-4">
+                                                            <div class="row mb-4">
+                                                                <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label">Expiry Date</label>
+                                                                    <input type="text" class="form-control" readonly value = {{display_list.Expiry_Date}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <!-- Chemical Name -->
+                                                        <div class="col-lg-9">
+                                                            <div class="row mb-4">
+                                                                <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Chemical Name</label>
+                                                                    <input type="text" class="form-control" readonly id = "xyz" value = {{display_list.Chemical_name}}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card 2 end -->
+                                    <!-- card 3 start -->
+                                    <div class="card">
+                                        {%for item in display_list.Technicals %}
+                                        <div class="card-body p-4">
+                                            <!-- row 1 start -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-9">
+                                                            <div class="row mb-4">
+                                                                <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Technical Name</label>
+                                                                    <input type="text" class="form-control" readonly value="{{item.Name}}" name="TechnicalName">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="theo_qty_hid[]" value="{{item.theo_qty}}" />
+                                                        <div class="col-lg-3">
+                                                            <div class="row mb-4">
+                                                                <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label form-label" for="validationCustom02">Purity</label>
+                                                                    <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name = "purity[]" value="{{item.purity}}" onkeyup="calculate_theor_val(this.value,{{ forloop.counter0 }})" id="validationCustom02" required >
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">Please Enter Purity.</div>
+                                                                    <p>{{i}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- row 1 end -->
+                                            <!-- row 2 start -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="row mb-4">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-6 col-form-label form-label" for="validationCustom03">Supplier Name</label>
+                                                                    <input  type="text" class="form-control" name="supplier_name" value="{{item.supplier_name}}" id="validationCustom03"  required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">Please Enter Supplier Name.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-8 col-form-label form-label" for="validationCustom04">Supplier Batch No.</label>
+                                                                    <input type="text"  step="0.01" class="form-control" name="supplier_batch" value="{{item.supplier_batch}}" id="validationCustom04" required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">Please Enter Supplier Batch No.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-8 col-form-label">Batch Target Base</label>
+                                                                    <input type="text" class="form-control" name ="Target_Base[]" readonly value="{{item.Target_Base}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-10 col-form-label">Theoritical Qty.(Kg/Lt)</label>
+                                                                    <input type="text" class="form-control" readonly name="theo_qty[]" value="{{item.theo_qty}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- row 2 end -->
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                    <!-- card 3 end -->
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label class="col-sm-8 col-form-label">Chemicals</label>
+                                                    <hr>
+                                                    <div class="row">
+                                                        {%for item in display_list.Raw_Materials%}
+                                                        <div class="col-lg-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Chemicals" value="{{item.Name}}"
+                                                                {%if item.theo_qty %} checked {%endif%}>
+                                                                <label class="form-check-label" style="font-weight:normal;font-size:12px;">{{item.Name}}</label>
+                                                            </div><br>
+                                                        </div><br>
+                                                        {%if item.Type == "Dual"%}
+                                                        <div class="col-lg-5">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Chemicals" checked value="{{item.Name}}">
+                                                                <label class="form-check-label" style="font-weight:normal;font-size:12px;">{{item.Name}}</label>
+                                                                <input type="text" class="form-control" placeholder="Enter Percentage" name="dual_percent" value="{{item.dual_percent}}"> <br>
+                                                            </div>
+                                                        </div>
+                                                        {%endif%}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card 5 start -->
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <!-- row 9 start -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="row mb-4">
+                                                                <label class="col-sm-2 col-form-label">Remark</label>
+                                                                <div class="col-lg-12">
+                                                                    <textarea class="form-control" style="height:100px;" name="remark" >{{display_list.Remark}}</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- row 9 end -->
+                                        </div>
+                                    </div>
+                                    <!-- card 5 end -->
+                                    <!-- card 6 start -->
+                                    {%if "batchcard_status" in user_permissions %}
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <!-- row 9 start -->
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <button type="submit" class="btn btn-primary w-md" name= "Approve" style="background-color: #258C38;">Approve</button>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <a href="/printbatchcard">  <button type="button" class="btn btn-primary w-md" style="background-color: #258C38;">Print</button></a>
+                                                </div>
+                                                <div class="col-lg-2"></div>
+                                                <div class="col-lg-2"></div>
+                                            </div>
+                                            <!-- row 9 end -->
+                                        </div>
+                                    </div>
+                                    <!-- card 6 end -->{%else%}
+                                    <!-- card 7 start -->
+                                    <div class="card">
+                                        <div class="card-body p-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            <a href="/printbatchcard">  <button type="button" class="btn btn-primary w-md" style="background-color: #258C38;">Print</button></a>
+                                                        </div></br>
+                                                        <div class="col-lg-2">
+                                                            <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name = "form3">Draft</button>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name="submit">Submit</button>
+                                                        </div>
+                                                        <div class="col-lg-2"></div>
+                                                        <div class="col-lg-2"></div>
+                                                        <div class="col-lg-2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <!-- card 7 end -->
+                                    {%if "batchcard_status" in user_permissions %}
+                                    <!-- Modal starts -->
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" id="modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Alert</h5>
+                                                    <button type="button" class="btn-close" style="padding: 0rem 2rem; width: 2px" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div data-repeater-list="outer-group" class="outer">
+                                                        <div data-repeater-item class="outer">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-8 col-form-label form-label" for="validationCustom06">Are you sure?</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-lg-10">
+                                                            <button type="submit" style="float: right;" class="btn btn-primary" name="Approve">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal end -->
+                                    {%else%}
+                                    <!-- Modal starts -->
+                                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" id="modal" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Alert</h5>
+                                                    <button type="button" class="btn-close" style="padding: 0rem 2rem; width: 2px" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div data-repeater-list="outer-group" class="outer">
+                                                        <div data-repeater-item class="outer">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="col-sm-8 col-form-label form-label" for="validationCustom06">Are you sure?</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-lg-10">
+                                                            <button type="submit" style="float: right;" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal end -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% include 'footer.html' %}
+            </div>
+            <!-- end main content-->
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <!-- pristine js -->
+        <script src="{% static 'libs/pristinejs/pristine.min.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+        <!-- model 1 popup js start-->
+        <script>
+            !function ()
+            {
+                "use strict";
+                window.addEventListener("load", function ()
+                {
+                    var e = document.getElementsByClassName("needs-validation");
+                    Array.prototype.filter.call(e, function (t)
+                    {
+                        $('button[type=submit]').on('click', function() {
+                            // alert('Hello')
+                            t.addEventListener("submit", function (e)
+                            {
+                                !1 === t.checkValidity() && (e.preventDefault(), e.stopPropagation()), t.classList.add("was-validated")
+                                if ($(".invalid-feedback:visible").length == 0 && !$('#modal').hasClass('show')) {
+                                    $('#modal').modal('show') && (e.preventDefault(), e.stopPropagation());
+                                }
+                            }, !1)
+                        })
+                    })
+                }, !1)
+            }(),
+            window.onload=function(){
+                var e=document.getElementById("pristine-valid-example"), t=new Pristine(e);
+                e.addEventListener("submit",function(e){
+                    e.preventDefault();
+                    t.validate()
+                });
+                var n=document.getElementById("pristine-valid-common"), i=new Pristine(n);
+                n.addEventListener("submit",function(e){
+                    e.preventDefault();
+                    i.validate()
+                });
+                var e=document.getElementById("pristine-valid-specificfield"), a=new Pristine(e), n=document.getElementById("specificfield");
+                a.addValidator(n,function(e,t){
+                    return!(!e.length||e[0]!==e[0].toUpperCase())
+                },"The first character must be capitalized",2,!1),
+                e.addEventListener("submit",function(e){e.preventDefault();a.validate()})
+            };
+        </script>
+        <!-- model 1 popup js end-->
+
+        <script>
+            function calculate_thqty(){
+                purity_obj = document.getElementsByName("purity[]");
+
+                index = purity_obj.length;
+                console.log(index);
+                for(i=0;i<index;i++){
+                console.log(purity_obj[i].value);
+                calculate_theor_val(purity_obj[i].value,i);
+                }
+
+
+            }
+            function calculate_theor_val(purity, index){
+                console.log("in the function");
+                console.log(purity);
+                //alert(purity);
+                //alert(index);
+                theor_val_obj = document.getElementsByName("theo_qty_hid[]");
+                //alert(theor_val_obj[index].value);
+                batch_size_obj = document.getElementById("batch_size").value;
+                console.log(batch_size_obj);
+                target_base_obj = document.getElementsByName("Target_Base[]")[index].value;
+                console.log(target_base_obj);
+                theor_val = batch_size_obj*target_base_obj/purity;
+                //theor_val = theor_val_obj[index].value / purity;
+                theor_val = parseFloat(theor_val).toFixed(2);
+                //alert(theor_val);
+                theo_qty_obj = document.getElementsByName("theo_qty[]");
+                theo_qty_obj[index].value = theor_val;
+            }
+
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+
+            function updateBrands(data){
+                    console.log(data);
+                    product_cat = $('#product_category').val();
+
+
+                   $('#brand_name')
+                                .find('option')
+                                .remove()
+                                .end()
+                                .append('<option value="">Select</option>');
+
+                    data.forEach(d =>{
+                        if(d.product_category == product_cat){
+                            $('#brand_name').append('<option value="'+d.Brand_Name+'">'+d.Brand_Name+'</option>')
+                       }
+                     })
+               }
+        </script>
+
+        <!-- checkbox js-->
+        <script type="text/javascript">
+
+            function myfun()
+            {
+                var a = document.getElementsByName('chk');
+                var newvar = 0;
+                var count;
+                for(count=0; count<a.lenght; count++)
+                {
+                    if(a[count].checked == true)
+                    newvar = newvar + 1;
+
+
+                }
+                if(newvar >= 2)
+                {
+                    return false;
+                }
+            }
+
+        </script>
+
+    </body>
+</html>

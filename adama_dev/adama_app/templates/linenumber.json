@@ -1,0 +1,10 @@
+{
+"plant_details":
+{
+  "Herbicide1": ["FM 301","FM 302","FM 303","FM 304","FM 305","FM 306","FM401","FM402"],
+  "Insecticide1": ["FM 101","FM 102","FM 103","FM 104","FM 105"],
+  "Insecticide2": ["FM 701","FM 702","FM 703","FM 801-A","FM 801-B","FM 801-C","FM 801-D","FM 404"],
+  "WDG": ["FM 1001"],
+  "NIMITZ": ["FM 901"]
+}
+}

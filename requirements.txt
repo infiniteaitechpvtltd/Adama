@@ -1,0 +1,14 @@
+asgiref==3.5.0
+Django==4.0.3
+sqlparse==0.4.2
+tzdata==2021.5
+python-dateutil==2.8.2
+mysqlclient==2.1.0
+python-dateutil==2.8.2
+pyodbc==4.0.32
+xhtml2pdf==0.2.7
+wfastcgi==3.0.0
+django-cors-headers==3.14.0
+
+
+

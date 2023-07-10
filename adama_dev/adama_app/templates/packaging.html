@@ -1,0 +1,689 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon2.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Packaging Dashboard</h4>
+                                    <!-- msg start -->
+                                    <!--
+                                    <div class="alert alert-success alert-dismissible alert-label-icon label-arrow fade show" role="alert">
+                                            <i class="mdi mdi-check-all label-icon"></i><strong>Success</strong> - Label icon arrow alert
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    -->
+                                    <!-- msg end -->
+                                    {%if "create_package" in user_permissions %}
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <a href="/newplanpackaging" class="btn btn-success w-md">Create New Packaging</a>
+                                        </ol>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+
+
+                                                    <thead>
+                                                        <tr>
+                                                            <h5>Completed Formulation</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Batch Card Number</th>
+                                                            <th>Product</th>
+                                                            <th>Created Date</th>
+                                                            <th>Batch Size</th>
+                                                            <th>Tank No.</th>
+                                                            <th>Status</th>
+                                                            <th>Operator Alloted</th>
+                                                            <th>Plant Name</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                            <td id="sort4"></td>
+                                                            <td id="sort5"></td>
+                                                            <td id="sort6"></td>
+                                                            <td id="sort7"></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {%for item in batchcard_list %}
+                                                        <tr>
+                                                            <td>{{item.BatchCardNo}}</td>
+                                                            <td>{{item.Brand_Name}}</td>
+                                                            <td>{{item.Created_Date}}</td>
+                                                            <td>{{item.Batch_Size}}</td>
+                                                            <td>{{item.Tank_Num}}</td>
+                                                            <td>{{item.BatchCard_Approval}}</td>
+                                                            <td>{{item.Created_By}}</td>
+                                                            <td>{{item.Plant_Name}}</td>
+                                                        </tr>
+                                                    {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> &lt;!&ndash; end col &ndash;&gt;
+                                    </div> &lt;!&ndash; end row &ndash;&gt;
+                            </div>
+                        </div>-->
+
+                        <div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons2" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <h5>Pending Approval</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Package Card No. </th>
+                                                            <th>Batch Card No. </th>
+                                                            <th>Product</th>
+                                                            <th>Created Date</th>
+                                                            <th>Pack Size</th>
+                                                            <th>Line No.</th>
+                                                            <th>Plant Name</th>
+                                                            <th>Created_By</th>
+                                                            <th>Edit/View</th>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                            <td id="sort4"></td>
+                                                            <td id="sort5"></td>
+                                                            <td id="sort6"></td>
+                                                            <td id="sort7"></td>
+                                                            <td id="sort8"></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {%for item in packagecard_list%}
+                                                    {%if item.PackageCardApproval == "Pending"%}
+                                                            <tr>
+                                                                <td>{{item.PackageCardNo}}</td>
+                                                                <td>{{item.BatchCardNo}}</td>
+                                                                <td>{{item.Chemical_name}}</td>
+                                                                <td>{{item.Created_Date}}</td>
+                                                                <td>{{item.Packsize}}</td>
+                                                                <td>{{item.LineName}}</td>
+                                                                <td>{{item.Plant_Name}}</td>
+                                                                <td>{{item.Created_By}}</td>
+                                                                {%if "edit_package" in user_permissions%}
+                                                                <td><a href="{% url 'editpackaging' item.PackageCardNo  %}" class="bx bx-edit-alt"></a> </td>
+                                                                {%else%}
+                                                                <td><a href="{% url 'viewpackaging' item.PackageCardNo  %}" class="bx bx-show-alt"></a> </td>
+                                                                {%endif%}
+                                                            </tr>
+                                                    {%endif%}
+                                                    {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons3" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+                                                    <thead>
+                                                        <tr>
+                                                            <h5 id="inprogresspackaging">Approved Packaging</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Package Card Number</th>
+                                                            <th>Batch Card Number</th>
+                                                            <th>Product</th>
+                                                            <th>Created Date</th>
+                                                            <th>Pack Size</th>
+                                                            <th>Line No.</th>
+                                                            <th>Plant Name</th>
+                                                            <th>Complete Production</th>
+                                                            <th>View</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                            <td id="sort4"></td>
+                                                            <td id="sort5"></td>
+                                                            <td id="sort6"></td>
+                                                            <td id="sort7"></td>
+                                                            <td id="sort8"></td>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {%for item in packagecard_list%}
+                                                    {%if item.PackageCardApproval == "Approve"%}
+                                                            <tr>
+                                                                <td>{{item.PackageCardNo}}</td>
+                                                                <td>{{item.BatchCardNo}}</td>
+                                                                <td>{{item.Chemical_name}}</td>
+                                                                <td>{{item.Created_Date}}</td>
+                                                                <td>{{item.Packsize}}</td>
+                                                                <td>{{item.LineName}}</td>
+                                                                <td>{{item.Plant_Name}}</td>
+                                                                <td><u><a href="{% url 'completepackagecard' item.PackageCardNo  %}">Complete Card</a></u></td>
+                                                                <td><a href="{% url 'viewpackaging' item.PackageCardNo  %}" class="bx bx-show-alt"></a> </td>
+                                                            </tr>
+                                                    {%endif%}
+                                                    {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons4" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <h5>Completed Packaging</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Package Card Number</th>
+                                                            <th>Batch Card Number</th>
+                                                            <th>Product</th>
+                                                            <th>Created Date</th>
+                                                            <th>Pack Size</th>
+                                                            <th>Line No.</th>
+                                                            <th>Plant Name</th>
+                                                            <th>Created By</th>
+                                                            <th>Comment</th>
+                                                            <th>View</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                            <td id="sort4"></td>
+                                                            <td id="sort5"></td>
+                                                            <td id="sort6"></td>
+                                                            <td id="sort7"></td>
+                                                            <td id="sort8"></td>
+                                                            <td id="sort9"></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {%for item in packagecard_list%}
+                                                    {%if item.PackageCardApproval == "Completed"%}
+                                                            <tr>
+                                                                <td>{{item.PackageCardNo}}</td>
+                                                                <td>{{item.BatchCardNo}}</td>
+                                                                <td>{{item.Chemical_name}}</td>
+                                                                <td>{{item.Created_Date}}</td>
+                                                                <td>{{item.Packsize}}</td>
+                                                                <td>{{item.LineName}}</td>
+                                                                <td>{{item.Plant_Name}}</td>
+                                                                <td>{{item.Created_By}}</td>
+                                                                <td>{{item.Remark}}</td>
+                                                                <td><a href="{% url 'viewpackaging' item.PackageCardNo  %}" class="bx bx-show-alt"></a> </td>
+                                                            </tr>
+                                                    {%endif%}
+                                                    {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% include 'footer.html' %}
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+         <!-- Alert init js -->
+        <script src="{% static 'js/pages/alert.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+
+
+
+        <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+        <!-- card 2 start -->
+        <script>
+                $(document).ready(function () {
+                    $("#datatable").DataTable(),
+                    $('#datatable-buttons2 thead tr')
+
+                    var table = $('#datatable-buttons2').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        lengthChange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        initComplete: function () {
+
+                            this.api().columns(0).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort0')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(1).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort1')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort2')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                        },
+                    }).buttons().container().appendTo("#datatable-buttons2_wrapper .col-md-6:eq(0)");
+                    $(".dataTables_length select").addClass("form-select form-select-sm")
+                });
+            </script>
+        <!-- card 3 start -->
+        <script>
+                $(document).ready(function () {
+                    $("#datatable").DataTable(),
+                    $('#datatable-buttons3 thead tr')
+
+                    var table = $('#datatable-buttons3').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        lengthChange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        initComplete: function () {
+
+                            this.api().columns(0).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort0')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(1).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort1')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort2')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                        },
+                    }).buttons().container().appendTo("#datatable-buttons3_wrapper .col-md-6:eq(0)");
+                    $(".dataTables_length select").addClass("form-select form-select-sm")
+                });
+            </script>
+        <!-- card 4 start -->
+        <script>
+                $(document).ready(function () {
+                    $("#datatable").DataTable(),
+                    $('#datatable-buttons4 thead tr')
+
+                    var table = $('#datatable-buttons4').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        lengthChange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        initComplete: function () {
+
+                            this.api().columns(0).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons4 thead tr #sort0')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(1).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons4 thead tr #sort1')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons4 thead tr #sort2')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                        },
+                    }).buttons().container().appendTo("#datatable-buttons4_wrapper .col-md-6:eq(0)");
+                    $(".dataTables_length select").addClass("form-select form-select-sm")
+                });
+            </script>
+
+
+    </body>
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon2.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+
+    </head>
+
+    <body data-topbar="dark">
+
+        <!-- <body data-layout="horizontal"> -->
+    
+            <!-- Begin page -->
+            <div id="layout-wrapper">
+    
+                {% include 'sidebar-base.html' %}
+    
+                {% include 'navbar-base.html' %}
+
+                <!-- ============================================================== -->
+                <!-- Start right Content here -->
+                <!-- ============================================================== -->
+                <div class="main-content">
+                    <div class="page-content">
+                        <div class="container-fluid">
+                            <!-- breadcrumb -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                        <h4 class="mb-sm-0 font-size-18">Formulation Dashboard</h4>
+                                        {%if "create_batchcard" in user_permissions %}
+                                        <div class="page-title-right">
+                                            <ol class="breadcrumb m-0">
+                                                <a href="/newbatchcard" class="btn btn-success w-md">Create New Batchcard</a>
+                                               <!-- <a href="http://adama/anyglass/Counting%20Status%20R-301.gdfx" target="_blank" class="btn btn-success w-md">Batchcard</a> -->
+                                            </ol>
+                                        </div>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- start panding card-->
+                            <div class="card">
+                                <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+                                                    <thead>
+                                                        <tr>
+                                                            <h5>Pending</h5>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Batch Card Number</th>
+                                                            <th>Product</th>
+                                                            <th>Plant Name</th>
+                                                            <th>Created Date</th>
+                                                            <th>Batch Size</th>
+                                                            <th>Tank No.</th>
+                                                            <th>Approval</th>
+                                                            <th>Status</th>
+                                                            <th>Created By</th>
+                                                            <th>Edit/View</th>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                            <td id="sort4"></td>
+                                                            <td id="sort5"></td>
+                                                            <td id="sort6"></td>
+                                                            <td id="sort7"></td>
+                                                            <td id="sort8"></td>
+                                                            <td id="sort9"></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {%for item in batch_list %}
+                                                    {%if item.BatchCard_Approval == "Pending" %}
+
+                                                        <tr data-id="1">
+                                                            {%if "view_recipe" in user_permissions %}
+                                                            <td>{{item.BatchCardNo}}</td>
+                                                            {% else %}
+                                                            <td><u><a  href="{% url 'viewreceipe' item.BatchCardNo  %}" title="View Receipt List">{{item.BatchCardNo}}</a></u></td>
+
+                                                            {%endif%}
+                                                            <td>{{item.Brand_Name}}</td>
+                                                            <td>{{item.Plant_Name}}</td>
+                                                            <td>{{item.Created_Date}}</td>
+                                                            <td>{{item.Batch_Size}}</td>
+                                                            <td>{{item.Tank_Num}}</td>
+                                                            <td data-field="approval">{{item.BatchCard_Approval}}</td>
+                                                            <td>{{item.BatchCard_Status}}</td>
+                                                            <td>{{item.Created_By}}</td>
+                                                            {%if "edit_batchcard" in user_permissions %}
+                                                            <td>
+                                                                <!--<a class="btn btn-outline-secondary btn-sm edit" title="Edit">-->
+                                                                <a href="{% url 'edit_batchcard' item.BatchCardNo  %}" title="Edit">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+                                                            </td>
+                                                            {%endif%}
+                                                            {%if "edit_batchcard" not in user_permissions %}
+                                                            <td>
+                                                                <a href="{% url 'view_batchcard' item.BatchCardNo  %}" title="Edit">
+                                                                    <i class="bx bx-show-alt"></i>
+                                                                </a>
+                                                            </td>
+                                                            {%endif%}
+                                                        </tr>
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                    </tbody>
+                                                    </table>
+                                                </div>
+                                            </div> <!-- end col -->
+                                        </div> <!-- end row -->
+                                </div>
+                            </div>
+                            <!-- end panding card-->
+                            <!-- start In Progress card-->
+                            <div class="card" >
+                                <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable-buttons2" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <h5 id="inprogress">In Progress</h5>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Batch Card Number</th>
+                                                                <th>Product</th>
+                                                                <th>Plant Name</th>
+                                                                <th>Created Date</th>
+                                                                <th>Batch Size</th>
+                                                                <th>Tank No.</th>
+                                                                <th>Approval</th>
+                                                                <th>Created By</th>
+                                                                <th>Add Chemical</th>
+                                                                <th>View</th>
+                                                            </tr>
+                                                           <tr>
+                                                                <td id="sort0"></td>
+                                                                <td id="sort1"></td>
+                                                                <td id="sort2"></td>
+                                                                <td id="sort3"></td>
+                                                                <td id="sort4"></td>
+                                                                <td id="sort5"></td>
+                                                                <td id="sort6"></td>
+                                                                <td id="sort7"></td>
+                                                                <td id="sort8"></td>
+                                                                <td id="sort9"></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {%for item in batch_list%}
+                                                            {%if item.BatchCard_Approval == "InProgress"%}
+                                                                    <tr>
+                                                                        {%if "view_recipe" in user_permissions %}
+
+                                                                        <td>{{item.BatchCardNo}}</td>
+                                                                        {% else %}
+                                                                        <td><u><a  href="{% url 'viewreceipe' item.BatchCardNo  %}" title="Edit">{{item.BatchCardNo}}</a></u></td>
+                                                                        {%endif%}
+                                                                        <td>{{item.Brand_Name}}</td>
+                                                                        <td>{{item.Plant_Name}}</td>
+                                                                        <td>{{item.Created_Date}}</td>
+                                                                        <td>{{item.Batch_Size}}</td>
+                                                                        <td>{{item.Tank_Num}}</td>
+                                                                        <td>{{item.BatchCard_Approval}}</td>
+                                                                        <td>{{item.Created_By}}</td>
+                                                                        <td><u><a href="{% url 'productrecipe' item.BatchCardNo  %}">Add Chemical</a></u></td>
+                                                                        <td>
+                                                                            <a href="{% url 'view_batchcard' item.BatchCardNo  %}" title="View">
+                                                                                <i class="bx bx-show-alt"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                            {%endif%}
+                                                            {%endfor%}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div> <!-- end col -->
+                                        </div>
+                                    <!-- end row -->
+                                </div>
+                            </div>
+                            <!-- end In Progress card-->
+                            <!-- start Complete card-->
+                            <div class="card">
+                                    <div class="card-body">
+                                           <!-- row 1 start -->
+
+                                           <!-- row 1 end -->
+                                        <!-- row 2 start -->
+                                            <div class="row">
+                                                <div class="col-xl-12">
+
+                                                    <div class="table-responsive">
+                                                        <table id="datatable-buttons3" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <h5>Completed</h5>
+                                                                </tr>
+                                                                <tr>
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+
+                                                                                <div class="mb-3">
+                                                                                    <label for="example-date-input" class="form-label">Start Date</label>
+                                                                                    <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                                                                </div>
+
+                                                                        </div>
+                                                                        <!--<div class="col-4">
+                                                                            <div class="classic-colorpicker"></div><div class="monolith-colorpicker"></div><div class="nano-colorpicker"></div>
+                                                                             <div>
+                                                                                    <label class="form-label">Range</label>
+                                                                                    <input type="text" class="form-control" id="datepicker-range">
+                                                                             </div>
+                                                                        </div>-->
+                                                                        <div class="col-2">
+                                                                            <div class="mb-3">
+                                                                                    <label for="example-date-input" class="form-label">End Date</label>
+                                                                                    <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                                <div>
+                                                                                <button type="button" class="btn btn-soft-primary btn-sm">
+                                                                                        ALL
+                                                                                    </button>
+                                                                                <button type="button" class="btn btn-soft-secondary btn-sm">
+                                                                                        1M
+                                                                                    </button>
+                                                                                <button type="button" class="btn btn-soft-secondary btn-sm">
+                                                                                        6M
+                                                                                    </button>
+                                                                                <button type="button" class="btn btn-soft-secondary btn-sm active">
+                                                                                        1Y
+                                                                                    </button>
+                                                                                </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                     <br>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Batch Card Number</th>
+                                                                    <th>Product</th>
+                                                                    <th>Plant Name</th>
+                                                                    <th>Created Date</th>
+                                                                    <th>Batch Size</th>
+                                                                    <th>Tank No.</th>
+                                                                    <th>Status</th>
+                                                                    <th>Created By</th>
+                                                                    <th>View</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td id="sort0"></td>
+                                                                    <td id="sort1"></td>
+                                                                    <td id="sort2"></td>
+                                                                    <td id="sort3"></td>
+                                                                    <td id="sort4"></td>
+                                                                    <td id="sort5"></td>
+                                                                    <td id="sort6"></td>
+                                                                    <td id="sort7"></td>
+                                                                    <td id="sort8"></td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {%for item in batch_list%}
+                                                            {%if item.BatchCard_Approval == "Completed"%}
+                                                                    <tr>
+                                                                        <td><u><a  href="{% url 'view_batchcard' item.BatchCardNo  %}" title="Edit">{{item.BatchCardNo}}</a></u></td>
+                                                                        <td>{{item.Brand_Name}}</td>
+                                                                        <td>{{item.Plant_Name}}</td>
+                                                                        <td>{{item.Date}}</td>
+                                                                        <td>{{item.Batch_Size}}</td>
+                                                                        <td>{{item.Tank_Num}}</td>
+                                                                        <td>{{item.BatchCard_Approval}}</td>
+                                                                        <td>{{item.Created_By}}</td>
+                                                                        <td>
+                                                                            <a href="{% url 'viewchemical' item.BatchCardNo  %}" title="View">
+
+                                                                                <i class="bx bx-show-alt"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                            {%endif%}
+                                                            {%endfor%}
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div>
+                                        <!-- end row 2-->
+                                    </div>
+                                </div>
+                            <!-- end complete card-->
+
+
+                        </div>
+                    </div>
+
+                    {% include 'footer.html' %}
+
+                </div>
+                    <!-- end main content-->
+
+
+            </div>
+            <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+
+
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+       <!--<script src="{% static 'js/pages/datatables.init.js' %}"></script>-->
+         <script src="{% static 'js/app.js' %}"></script>
+
+            <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+            <!-- start card 2 buttons-->
+            <script>
+                $(document).ready(function () {
+                    $("#datatable").DataTable(),
+                    $('#datatable-buttons2 thead tr')
+
+                    var table = $('#datatable-buttons2').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        lengthChange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        initComplete: function () {
+
+                            this.api().columns(0).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort0')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(1).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort1')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons2 thead tr #sort2')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                        },
+                    }).buttons().container().appendTo("#datatable-buttons2_wrapper .col-md-6:eq(0)");
+                    $(".dataTables_length select").addClass("form-select form-select-sm")
+                });
+            </script>
+            <!-- end card 2 buttons -->
+            <!-- start card 3 buttons-->
+            <script>
+                $(document).ready(function () {
+                    $("#datatable").DataTable(),
+                    $('#datatable-buttons3 thead tr')
+
+                    var table = $('#datatable-buttons3').DataTable({
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        lengthChange: !1,
+                        buttons: ["copy", "excel", "pdf", "colvis"],
+                        initComplete: function () {
+
+                            this.api().columns(0).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort0')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(1).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort1')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $(' <select class="form-select"><option value=""></option></select>')
+                                    // .appendTo(myTable.header())
+                                    .appendTo('#datatable-buttons3 thead tr #sort2')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            })
+
+                        },
+                    }).buttons().container().appendTo("#datatable-buttons3_wrapper .col-md-6:eq(0)");
+                    $(".dataTables_length select").addClass("form-select form-select-sm")
+                });
+            </script>
+            <!-- end card 3 buttons -->
+
+        </body>
+    </html>
+

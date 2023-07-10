@@ -1,0 +1,1173 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Group Security | NIV-DAS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+        <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Group Security</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                                            <li class="breadcrumb-item active">Group Security</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <form method="POST" action="#" class="needs-validation" novalidate>
+                                        {% csrf_token %}
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Group<span style="color:red"> *</span></label>
+                                                        <select class="form-control" name="Group" id="group" required>
+                                                            <option selected disabled value="">-- Select Option --</option>
+                                                            {% for i in group %}
+                                                                <option>{{i.GroupName}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <div id="noerror" class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                        <div id="error" class="invalid-feedback">
+                                                            Looks bad!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-1 col-md-1"></div>
+                                                <div class="col-xl-3 col-md-5">
+                                                    <div class="form-group mb-3"><br> <br>
+                                                        <div class="form-check font-size-16" style="float: right;">
+                                                            <input class="form-check-input" type="checkbox" name="All"
+                                                                value="Select all" id="all">
+                                                            <label class="form-check-label" for="admincheck06">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-2 col-md-1"><br><br>
+                                                    <button class="btn btn-primary waves-effect waves-light" 
+                                                        type="submit" style="float: right;">Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body" style="overflow-y: scroll; height: 340px;">
+                                            <div class="row">
+                                                <div class="card-body">
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Admin0"
+                                                            value="Admin Page" id="admin0">
+                                                        <label class="form-check-label" for="checkAdmin">
+                                                            Admin
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="UserCreation" id="admin1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    User Creation
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="GroupSec" id="admin2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Group Security
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="UserSec" id="admin3">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    User Security
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="DatabaseSetting" id="admin4">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Database Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="SMSsetting" id="admin5">
+                                                                <label class="form-check-label" for="admincheck05"
+                                                                    style="color: darkgray;">
+                                                                    SMS Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="EmailSetting" id="admin6">
+                                                                <label class="form-check-label" for="admincheck05"
+                                                                    style="color: darkgray;">
+                                                                    Email Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="MasterPasswdSetting" id="admin7">
+                                                                <label class="form-check-label" for="admincheck06"
+                                                                    style="color: darkgray;">
+                                                                    Master Password Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Admin1"
+                                                                    value="GeneralSetting" id="admin8">
+                                                                <label class="form-check-label" for="admincheck05"
+                                                                    style="color: darkgray;">
+                                                                    General Setting
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="mb-5">
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Master0"
+                                                            value="Master Settings Page" id="master0">
+                                                        <label class="form-check-label" for="checkmaster">
+                                                            Master Settings
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="EquipmentCreation" id="master1">
+                                                                <label class="form-check-label" for="mastercheck01"
+                                                                    style="color: darkgray;">
+                                                                    Equipment Creation
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="EquipmentParameter" id="master2">
+                                                                <label class="form-check-label" for="mastercheck02"
+                                                                    style="color: darkgray;">
+                                                                    Equipment Parameter
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="EquipmentActivation" id="master3">
+                                                                <label class="form-check-label" for="mastercheck03"
+                                                                    style="color: darkgray;">
+                                                                    Equipment Activation
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="Template" id="master4">
+                                                                <label class="form-check-label" for="mastercheck04"
+                                                                    style="color: darkgray;">
+                                                                    Template
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="MobileNumber" id="master5">
+                                                                <label class="form-check-label" for="mastercheck05"
+                                                                    style="color: darkgray;">
+                                                                    Mobile Number
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="MasterTemplate" id="master6">
+                                                                <label class="form-check-label" for="admincheck06"
+                                                                    style="color: darkgray;">
+                                                                    Master Template
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="SyncDataTime" id="master7">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Synchronize Date Time
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="ResetLuxUV" id="master8">
+                                                                <label class="form-check-label" for="admincheck05"
+                                                                    style="color: darkgray;">
+                                                                    Reset Lux UV
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Master1"
+                                                                    value="InputOutputStatus" id="master9">
+                                                                <label class="form-check-label" for="admincheck06"
+                                                                    style="color: darkgray;">
+                                                                    Input Output Status
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="mb-5">
+
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Supervise0"
+                                                            value="Supervise Page" id="supervise0">
+                                                        <label class="form-check-label" for="checksupervise">
+                                                            Supervise
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Supervise1" value="EquipmentList" id="supervise1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    Equipment List
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Supervise1" value="DataView" id="supervise2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Data View
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Supervise1" value="LuxUVDataView" id="supervise3">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    Lux UV Data View
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Supervise1" value="ReportApproval" id="supervise4">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Report Approval
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="Supervise1" value="StatusReports" id="supervise5">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    Status Reports
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="mb-5">
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Audit0"
+                                                            value="Audit Trails Page" id="audit0">
+                                                        <label class="form-check-label" for="checkadmin">
+                                                            Audit Trails
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Audit1"
+                                                                    value="UserAudit" id="audit1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    User Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Audit1"
+                                                                    value="AlarmAudit" id="audit2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Alarm Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Audit1"
+                                                                    value="SMSAudit" id="audit3">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    SMS Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Audit1"
+                                                                    value="EquipmentAudit" id="audit4">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Equipment Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Audit1"
+                                                                    value="EmailAudit" id="audit5">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Email Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="mb-5">
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="History0"
+                                                            value="History Page" id="history0">
+                                                        <label class="form-check-label" for="checkadmin">
+                                                            History Page
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="DataReportGraph" id="history1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    Data Report/Graph
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="LuxUVDataView" id="history2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Lux UV Data View
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="HUserAudit" id="history3">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    User Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="HAlarmAudit" id="history4">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Alarm Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="HSMSAudit" id="history5">
+                                                                <label class="form-check-label" for="admincheck05"
+                                                                    style="color: darkgray;">
+                                                                    SMS Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="HEquipmentAudit" id="history6">
+                                                                <label class="form-check-label" for="admincheck06"
+                                                                    style="color: darkgray;">
+                                                                    Equipment Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="History1"
+                                                                    value="HEmailAudit" id="history7">
+                                                                <label class="form-check-label" for="admincheck04"
+                                                                    style="color: darkgray;">
+                                                                    Email Audit
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div><br>
+
+                                                    <hr class="mb-5">
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Tool0"
+                                                            value="Audit Trails Page" id="tool0">
+                                                        <label class="form-check-label" for="checkadmin">
+                                                            Tools/Utility
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Tool1"
+                                                                    value="GraphSettings" id="tool1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    Graph Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Tool1"
+                                                                    value="PasswordSettings" id="tool2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Password Settings
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Tool1"
+                                                                    value="PrintMultipleReports" id="tool3">
+                                                                <label class="form-check-label" for="admincheck03"
+                                                                    style="color: darkgray;">
+                                                                    Print Multiple Reports
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="mb-5">
+
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox" name="Help0"
+                                                            value="Help Page" id="help0">
+                                                        <label class="form-check-label" for="checkadmin">
+                                                            Help
+                                                        </label>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Help1"
+                                                                    value="AboutUs" id="help1">
+                                                                <label class="form-check-label" for="admincheck01"
+                                                                    style="color: darkgray;">
+                                                                    About Us
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="form-check font-size-16">
+                                                                <input class="form-check-input" type="checkbox" name="Help1"
+                                                                    value="Help" id="help2">
+                                                                <label class="form-check-label" for="admincheck02"
+                                                                    style="color: darkgray;">
+                                                                    Help
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end card body -->
+                                            </div>
+
+                                        </div> <!-- end card-body -->
+                                        
+                                        <!-- Modal starts -->
+                                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                            id="modal" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Verify Admin</h5>
+                                                        <button type="button" class="btn-close"
+                                                            style="padding: 0rem 2rem; width: 2px"
+                                                            data-bs-dismiss="modal" aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div data-repeater-list="outer-group" class="outer">
+                                                            <div data-repeater-item class="outer">
+            
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Username<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z\s]{1,}" 
+                                                                        id="username" name="Username" placeholder="Enter Username" required>
+                                                                    </div>
+                                                                </div>
+            
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4">Password<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="password" class="form-control" pattern="[a-zA-Z0-9!@#$%&*]{1,}" 
+                                                                        id="password" name="Password" placeholder="Enter Password" required>
+                                                                    </div>
+                                                                </div>
+            
+                                                                <div class="form-group row mb-4">
+                                                                    <label class="col-form-label col-lg-4" for="validationCustom01">Comments<span style="color:red">*</span></label>
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control" pattern="[a-zA-Z0-9\s]{1,}" 
+                                                                        id="comments" name="Comments" placeholder="Enter Comment" required>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="row justify-content-end">
+                                                            <div class="col-lg-10">
+                                                                <button type="submit" style="float: right;"
+                                                                    class="btn btn-primary" id="submit-btn">Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                        
+                                    </form>
+                                </div> <!-- end card -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © NIV-DAS.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#admin0').on('change', function () {
+                var items = document.getElementsByName('Admin1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#supervise0').on('change', function () {
+                var items = document.getElementsByName('Supervise1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#audit0').on('change', function () {
+                var items = document.getElementsByName('Audit1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#master0').on('change', function () {
+                var items = document.getElementsByName('Master1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#history0').on('change', function () {
+                var items = document.getElementsByName('History1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#tool0').on('change', function () {
+                var items = document.getElementsByName('Tool1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#help0').on('change', function () {
+                var items = document.getElementsByName('Help1');
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Admin1]").change(function () {
+                if ($('input[name=Admin1]:checked').length != 8) {
+                    $("#admin0").prop("checked", false);
+                }
+                else {
+                    $("#admin0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Master1]").change(function () {
+                if ($('input[name=Master1]:checked').length != 9) {
+                    $("#master0").prop("checked", false);
+                }
+                else {
+                    $("#master0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Supervise1]").change(function () {
+                if ($('input[name=Supervise1]:checked').length != 5) {
+                    $("#supervise0").prop("checked", false);
+                }
+                else {
+                    $("#supervise0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Audit1]").change(function () {
+                if ($('input[name=Audit1]:checked').length != 5) {
+                    $("#audit0").prop("checked", false);
+                }
+                else {
+                    $("#audit0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=History1]").change(function () {
+                if ($('input[name=History1]:checked').length != 7) {
+                    $("#history0").prop("checked", false);
+                }
+                else {
+                    $("#history0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Tool1]").change(function () {
+                if ($('input[name=Tool1]:checked').length != 3) {
+                    $("#tool0").prop("checked", false);
+                }
+                else {
+                    $("#tool0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Decheck select all, if one checkbox is dechecked
+            $("[name=Help1]").change(function () {
+                if ($('input[name=Help1]:checked').length != 2) {
+                    $("#help0").prop("checked", false);
+                }
+                else {
+                    $("#help0").prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            // Select all checkbox -- basic check/uncheck all
+            $('#all').on('change', function () {
+                var items = document.getElementsByClassName("form-check-input");
+                if (this.checked == true) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = true;
+                    }
+                    console.log('check')
+                }
+                else if (this.checked == false) {
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].type == 'checkbox')
+                            items[i].checked = false;
+                    }
+                    console.log('uncheck')
+                }
+            });
+        </script>
+
+        <script>
+            $('.form-check-input').click(function () {
+                if ($(this).prop("checked") == false) {
+                    $('#all').prop("checked", false);
+                }
+            });
+
+            $(".form-check-input").change(function () {
+                if ($('.form-check-input:checked').length == $('.form-check-input').length - 1) {
+                    $('#all').prop("checked", true);
+                }
+            });
+        </script>
+
+        <script>
+            $("#group").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                console.log("Change : ",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/group-security-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        if (r.userCreation == true) {
+                            document.getElementById("admin1").checked = true
+                        }
+                        if (r.groupSec == true) {
+                            document.getElementById("admin2").checked = true
+                        }
+                        if (r.userSec == true) {
+                            document.getElementById("admin3").checked = true
+                        }
+                        if (r.databaseSetting == true) {
+                            document.getElementById("admin4").checked = true
+                        }
+                        if (r.SMSSetting == true) {
+                            document.getElementById("admin5").checked = true
+                        }
+                        if (r.emailSetting == true) {
+                            document.getElementById("admin6").checked = true
+                        }
+                        if (r.MasterPasswdSetting == true) {
+                            document.getElementById("admin7").checked = true
+                        }
+                        if (r.GeneralSetting == true) {
+                            document.getElementById("admin8").checked = true
+                        }
+                        if (r.EquipmentCreation == true) {
+                            document.getElementById("master1").checked = true
+                        }
+                        if (r.EquipmentParameter == true) {
+                            document.getElementById("master2").checked = true
+                        }
+                        if (r.EquipmentActivation == true) {
+                            document.getElementById("master3").checked = true
+                        }
+                        if (r.Template == true) {
+                            document.getElementById("master4").checked = true
+                        }
+                        if (r.MobileNumber == true) {
+                            document.getElementById("master5").checked = true
+                        }
+                        if (r.MasterTemplate == true) {
+                            document.getElementById("master6").checked = true
+                        }
+                        if (r.SyncDataTime == true) {
+                            document.getElementById("master7").checked = true
+                        }
+                        if (r.ResetLuxUV == true) {
+                            document.getElementById("master8").checked = true
+                        }
+                        if (r.InputOutputStatus == true) {
+                            document.getElementById("master9").checked = true
+                        }
+                        if (r.EquipmentList == true) {
+                            document.getElementById("supervise1").checked = true
+                        }
+                        if (r.DataView == true) {
+                            document.getElementById("supervise2").checked = true
+                        }
+                        if (r.LuxUVDataView == true) {
+                            document.getElementById("supervise3").checked = true
+                        }
+                        if (r.ReportApproval == true) {
+                            document.getElementById("supervise4").checked = true
+                        }
+                        if (r.StatusReports == true) {
+                            document.getElementById("supervise5").checked = true
+                        }
+                        if (r.UserAudit == true) {
+                            document.getElementById("audit1").checked = true
+                        }
+                        if (r.AlarmAudit == true) {
+                            document.getElementById("audit2").checked = true
+                        }
+                        if (r.SMSAudit == true) {
+                            document.getElementById("audit3").checked = true
+                        }
+                        if (r.EquipmentAudit == true) {
+                            document.getElementById("audit4").checked = true
+                        }
+                        if (r.EmailAudit == true) {
+                            document.getElementById("audit5").checked = true
+                        }
+                        if (r.DataReportGraph == true) {
+                            document.getElementById("history1").checked = true
+                        }
+                        if (r.LuxUVDataView == true) {
+                            document.getElementById("history2").checked = true
+                        }
+                        if (r.HUserAudit == true) {
+                            document.getElementById("history3").checked = true
+                        }
+                        if (r.HAlarmAudit == true) {
+                            document.getElementById("history4").checked = true
+                        }
+                        if (r.HSMSAudit == true) {
+                            document.getElementById("history5").checked = true
+                        }
+                        if (r.HEquipmentAudit == true) {
+                            document.getElementById("history6").checked = true
+                        }
+                        if (r.HEmailAudit == true) {
+                            document.getElementById("history7").checked = true
+                        }
+                        if (r.GraphSettings == true) {
+                            document.getElementById("tool1").checked = true
+                        }
+                        if (r.PasswordSettings == true) {
+                            document.getElementById("tool2").checked = true
+                        }
+                        if (r.PrintMultipleReports == true) {
+                            document.getElementById("tool3").checked = true
+                        }
+                        if (r.AboutUs == true) {
+                            document.getElementById("help1").checked = true
+                        }
+                        if (r.Help == true) {
+                            document.getElementById("help2").checked = true
+                        }
+                        if ($('input[name=Admin1]:checked').length == 8) {
+                            $("#admin0").prop("checked", true);
+                        }
+                        if ($('input[name=Master1]:checked').length == 9) {
+                            $("#master0").prop("checked", true);
+                        }
+                        if ($('input[name=Supervise1]:checked').length == 5) {
+                            $("#supervise0").prop("checked", true);
+                        }
+                        if ($('input[name=Audit1]:checked').length == 5) {
+                            $("#audit0").prop("checked", true);
+                        }
+                        if ($('input[name=History1]:checked').length == 7) {
+                            $("#history0").prop("checked", true);
+                        }
+                        if ($('input[name=Tool1]:checked').length == 3) {
+                            $("#tool0").prop("checked", true);
+                        }
+                        if ($('input[name=Help1]:checked').length == 2) {
+                            $("#help0").prop("checked", true);
+                        }
+                        if ($('.form-check-input:checked').length == $('.form-check-input').length - 1) {
+                            $('#all').prop("checked", true);
+                        }
+                        else {
+                            $('#all').prop("checked", false);
+                        }
+                    }
+                });
+            });
+        </script>
+
+
+    </body>
+
+</html>

@@ -1,0 +1,632 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon2.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+            {% include 'sidebar-base.html' %}
+            {% include 'navbar-base.html' %}
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Edit Packaging</h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+                                            <li class="breadcrumb-item active"><a href="/packaging">View</a></li>
+                                            <li class="breadcrumb-item active">Edit Packaging</li>
+
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                         <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <!-- Card Body Start -->
+                                    <div class="card-body p-4">
+                                        <form method="post" class="needs-validation" novalidate>
+                                            {% csrf_token %}
+                                            <div class="card">
+                                                <div class="card-body p-4">
+                                                 <!-- row 1 Start -->
+                                                 <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Batch Card No</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.BatchCardNo}}" name="batchcardno" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Package Card No</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.PackageCardNo}}" name="packagecardno" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Product Name</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.Chemical_name}}" name="chemical_name" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-6 col-form-label">SPGR</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.SPGR}}" name="spgr" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-6 col-form-label form-label" for="validationCustom01">Pack Size</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.Packsize}}" id="validationCustom01" name="packsize" required>
+                                                                        <div class="valid-feedback">
+                                                                                Looks good!
+                                                                          </div>
+                                                                          <div class="invalid-feedback">
+                                                                                Please Select Pack Size.
+                                                                          </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom02">Material Net Weight</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="netwt" value="{{get_packagecard.MaterialNetWt}}" id="netwt" onkeyup="calculate_gross_wt()" id="validationCustom02"  required>
+                                                                        <div class="valid-feedback">
+                                                                                Looks good!
+                                                                          </div>
+                                                                          <div class="invalid-feedback">
+                                                                                Please Enter Valid Number
+                                                                          </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-6 col-form-label form-label" for="validationCustom03">Box Type</label>
+                                                                        <input type="text" class="form-control" value="{{get_packagecard.BoxType}}" id="validationCustom03" name="box_type" required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Select Box Type
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom04">No. of Units per box</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="units" value="{{get_packagecard.Units_Box}}" id="validationCustom04"  required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Select No. of Units
+                                                                        </div>
+                                                                </div>
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom12">Required Production Count</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" value="{{get_packagecard.ProductionCount}}" name="productioncount" id="validationCustom12"   required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Required Count
+                                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                                <!-- row 1End -->
+                                                <hr />
+                                                <!-- row 2 Start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom05">Empty Container Avg. Weight</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name = "avgwt" id="avgwt" value="{{get_packagecard.ContainerWt}}" onkeyup="calculate_gross_wt()" id="validationCustom05"  required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Avg. Weight.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label" >Material + Cont. Gross Weight</label>
+                                                                        <input type="text" class="form-control" name="grosswt" id="grosswt" value="{{get_packagecard.GrossWt}}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom06">Plug / Cap Average Weight</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="plugwt" id="plugwt" value="{{get_packagecard.CapAvgWt}}" onkeyup="calculate_stdwt()" id="validationCustom06"  required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Avg. Weight.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Unit Standard Weight</label>
+                                                                        <input type="text" class="form-control" readonly name="stdwt" value="{{get_packagecard.StdWt}}" id="stdwt">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- row 2 End -->
+                                                <hr />
+                                                <!-- row 3 Start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom07">Mat. + Cont. + Plug/Cap Range Min. Percent</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="minstdqtypercent" value="{{get_packagecard.MinPercent}}" id = "minstdqtypercent" onkeyup="cal_range()" id="validationCustom07"   required>
+                                                                        <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Percentage.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Mat. + Cont. + Plug/Cap Range Min.</label>
+                                                                        <input type="text" class="form-control" name="minstdqty" value="{{get_packagecard.MinStdWt}}" id = "minstdqty" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom08">Mat. + Cont. + Plug/Cap Range Max. Percent</label>
+                                                                        <input type="number" pattern="[0-9]+([.,][0-9]+)?" step="0.01" class="form-control" name="maxstdqtypercent" id="maxstdqtypercent" value="{{get_packagecard.MacPercent}}" onkeyup="cal_range()" id="validationCustom08"  required>
+                                                                        <div class="valid-feedback">
+                                                                            Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Percentage.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Mat. + Cont. + Plug/Cap Range Max</label>
+                                                                        <input type="text" class="form-control" name="maxstdqty" value="{{get_packagecard.MaxStdWt}}" id="maxstdqty" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- row 3 End -->
+                                                <!-- row 4 Start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-12">
+                                                                        <label class="col-sm-12 col-form-label">Remark</label>
+                                                                        <input type="text" class="form-control" name="remark" value="{{get_packagecard.Remark}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- row 4 End -->
+                                            </div>
+                                            </div>
+                                             </div>
+                                            <!-- card 6 start -->
+                                            <div class="card">
+                                                <div class="card-body p-4">
+                                                    <!-- row 1 start -->
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row mb-4">
+                                                                        <label class="col-sm-12 col-form-label form-label" for="validationCustom09">Instructions For Next Shift Line Operator</label>
+                                                                        <div class="col-lg-12">
+                                                                            <textarea class="form-control" style="height:100px;" name="instruction" id="validationCustom09"  required>{{get_packagecard.Instructions}}</textarea>
+                                                                            <div class="valid-feedback">
+                                                                         Looks good!
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                             Please Enter Instructions.
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- row 1 end -->
+                                                </div>
+                                            </div>
+                                            <!-- card 6 end -->
+                                            <!-- card 7 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                 <!-- row 2 start -->
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                             <div class="row">
+                                                                 {%if "packagecard_status" in user_permissions %}
+                                                                  <div class="col-lg-2">
+                                                                      <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name="Approve" value="Approve">Approve Package Card</button>
+                                                                 </div>
+                                                                 {%endif%}
+
+                                                                 <div class="col-lg-2">
+                                                                      <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name="Discard" value="Discard">Discard</button>
+                                                                 </div>
+
+                                                                 </br>
+                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- row 2 end -->
+                                            </div>
+                                        </div>
+                                        <!-- card 7 end -->
+                                            <!-- button Start -->
+                                            <!--
+                                            <div class="row">
+                                                <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-2">
+                                                             <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name="draft">Draft</button>
+                                                         </div></br>
+                                                         <form>
+                                                         </form>
+                                                             </br>
+                                                         <div class="col-lg-2">
+                                                             <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;" name="submit">Submit</button>
+                                                         </div>
+                                                         <div class="col-lg-2"></div>
+                                                         <div class="col-lg-2"></div>
+                                                         <div class="col-lg-2"></div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            -->
+
+                                        </form>
+
+                                    </div>
+                                    <!-- Card Body Start -->
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+
+                        <!-- Form End -->
+                            <!-- Modal starts -->
+                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" id="modal" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Verify User</h5>
+                                                            <button type="button" class="btn-close"
+                                                                style="padding: 0rem 2rem; width: 2px"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div data-repeater-list="outer-group" class="outer">
+                                                                <div data-repeater-item class="outer">
+                                                                    <div class="row mb-3">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-8 col-form-label form-label" for="validationCustom16">Enter Your Name</label>
+
+                                                                                <input type="text" class="form-control" id="validationCustom16" name="created" required >
+                                                                                 <div class="valid-feedback">
+                                                                                 Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                     Please Enter Your Name.
+                                                                                </div>
+                                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-end">
+                                                                <div class="col-lg-10">
+                                                                    <button type="submit" style="float: right;" class="btn btn-primary" id="submit-btn" name="Approve" value="Approve">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div>
+                                            <!-- /.modal end -->
+                                            <!-- Modal starts -->
+                        <!--
+                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                                id="modal" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm Discard</h5>
+                                                            <button type="button" class="btn-close"
+                                                                style="padding: 0rem 2rem; width: 2px"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div data-repeater-list="outer-group" class="outer">
+                                                                <div data-repeater-item class="outer">
+                                                                    <div class="row mb-3">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="col-sm-8 col-form-label form-label" for="validationCustom16">Enter Your Name</label>
+
+                                                                                <input type="text" class="form-control" id="validationCustom17" name="created" required >
+                                                                                 <div class="valid-feedback">
+                                                                                 Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                     Please Enter Your Name.
+                                                                                </div>
+                                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-end">
+                                                                <div class="col-lg-10">
+                                                                    <button type="submit" style="float: right;" class="btn btn-primary" id="submit-btn1">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        -->
+                                            <!-- /.modal end -->
+
+                    </div>
+                </div>
+
+                {% include 'footer.html' %}
+
+            </div>
+            <!-- end main content-->
+        </div>
+        <!-- END layout-wrapper -->
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <!-- pristine js -->
+        <script src="{% static 'libs/pristinejs/pristine.min.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+        <script>
+
+            function calculate_gross_wt(){
+            avgwt = document.getElementById("avgwt");
+            netwt = document.getElementById("netwt");
+            grosswt = parseInt(netwt.value) + parseInt(avgwt.value);
+            document.getElementById("grosswt").value = grosswt;
+            //console.log(grosswt);
+
+            }
+            function calculate_stdwt(){
+            avgwt = document.getElementById("grosswt");
+            netwt = document.getElementById("plugwt");
+            stdwt = parseInt(netwt.value) + parseInt(avgwt.value);
+            document.getElementById("stdwt").value = stdwt;
+
+
+            }
+            function cal_range(){
+            minpercent = document.getElementById("minstdqtypercent");
+            maxpercent = document.getElementById("maxstdqtypercent");
+            stdwt = document.getElementById("stdwt");
+            minval = parseInt(stdwt.value) - parseInt(stdwt.value)*(parseFloat(minpercent.value)/100);
+            maxval = parseInt(stdwt.value) + parseInt(stdwt.value)*(parseFloat(maxpercent.value)/100);
+            console.log(minval,maxval);
+            document.getElementById("minstdqty").value = minval;
+            document.getElementById("maxstdqty").value = maxval;
+
+            }
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+
+
+    </body>
+</html>

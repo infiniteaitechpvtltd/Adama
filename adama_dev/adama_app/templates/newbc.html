@@ -1,0 +1,634 @@
+<!doctype html>
+{% load static %}
+
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Dashboard | ADAMA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/favicon1.ico' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Formulation Batch Sheet - Liquid Product</h4>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Start -->
+                        <form>
+                         <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+
+                                    <!-- Card Body Start -->
+                                    <div class="card-body p-4">
+                                         <div class="row">
+                                                <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label">Shift</label>
+
+                                                                    <select class="form-select">
+                                                                        <option>Select</option>
+                                                                        {% for item in data.shift%}
+                                                                        <option>{{item}}</option>
+                                                                        {%endfor%}
+                                                                    </select>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-2">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Date</label>
+
+                                                                    <input type="text" class="form-control" readonly value="{{data.date}}">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                        <!-- card 1 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                 <!-- row 1 Start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-6 col-form-label">Product Category</label>
+
+                                                                 <select class="form-select">
+                                                                        <option>Select</option>
+                                                                        {% for key,value in data.product_category.items %}
+                                                                        <option>{{key}}</option>
+                                                                        {%endfor%}
+                                                                 </select>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Brand Name</label>
+
+                                                                  <select class="form-select">
+                                                                        <option>Select</option>
+                                                                        {% for item in data.Chemicals %}
+                                                                        <option>{{item.Brand_Name}}</option>
+                                                                        {%endfor%}
+                                                                    </select>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">SAP Code</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-10 col-form-label">MFG Date</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 1End -->
+                                                <!-- row 2 Start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-9">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Chemical Name</label>
+
+                                                                    <input type="text" class="form-control" readonly>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label">EXP Date</label>
+
+                                                                    <input type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 2 End -->
+                                            </div>
+                                        </div>
+                                        <!-- card 1 end -->
+                                        <!-- card 2 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <!-- row 3 Start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-4">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-6 col-form-label">Batch Card No.</label>
+
+                                                                 <input  type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                         <div class="col-lg-4">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Batch Size</label>
+
+                                                                 <input type="text" class="form-control">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-4">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Tank No.</label>
+
+                                                                     <select class="form-select">
+                                                                        <option>Select</option>
+                                                                        <option>Tank 1</option>
+                                                                        <option>Tank 2</option>
+                                                                    </select>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+
+
+                                                     </div>
+
+                                             </div>
+                                                </div>
+                                                <!-- row 3 End -->
+                                            </div>
+                                        </div>
+                                        <!-- card 2 end -->
+                                         <!-- card 3 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <!-- row 1 start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-9">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Row Material Name</label>
+
+                                                                    <input type="text" class="form-control" >
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label">Purity</label>
+
+                                                                    <input type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 1 end -->
+                                                <!-- row 2 start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-6 col-form-label">Supplier Name</label>
+
+                                                                 <input  type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Supplier Batch No.</label>
+
+                                                                 <input type="text" class="form-control">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Batch Target Base</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-10 col-form-label">Theoritical Qty.(Kg/Lt)</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 2 end -->
+                                            </div>
+                                        </div>
+                                        <!-- card 3 end -->
+                                        <!-- card 4 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <!-- row 1 start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-9">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-3 col-form-label">Row Material Name</label>
+
+                                                                    <input type="text" class="form-control" >
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-lg-12">
+                                                                    <label class="col-sm-6 col-form-label">Purity</label>
+
+                                                                    <input type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 1 end -->
+                                                <!-- row 2 start -->
+                                                <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-6 col-form-label">Supplier Name</label>
+
+                                                                 <input  type="text" class="form-control">
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Supplier Batch No.</label>
+
+                                                                 <input type="text" class="form-control">
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-8 col-form-label">Batch Target Base</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-3">
+                                                             <div class="row mb-3">
+                                                                 <div class="col-sm-12">
+                                                                <label class="col-sm-10 col-form-label">Theoritical Qty.(Kg/Lt)</label>
+
+                                                                     <input type="text" class="form-control" readonly>
+                                                                 </div>
+
+                                                             </div>
+                                                         </div>
+
+
+
+                                                     </div>
+
+                                             </div>
+                                        </div>
+                                                <!-- row 2 end -->
+                                            </div>
+                                        </div>
+                                        <!-- card 4 end -->
+                                         <!-- card 5 start -->
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <!-- row 9 start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-12">
+                                                             <div class="row mb-4">
+                                                                <label class="col-sm-2 col-form-label">Remark</label>
+                                                                 <div class="col-lg-12">
+                                                                     <textarea class="form-control" style="height:100px;"> </textarea>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                             </div>
+                                                </div>
+                                                <!-- row 9 end -->
+                                            </div>
+                                        </div>
+                                        <!-- card 5 end -->
+                                        <!-- button Start -->
+                                        <div class="row">
+                                             <div class="col-12">
+                                                     <div class="row">
+                                                         <div class="col-lg-2">
+                                                             <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;">Draft</button>
+                                                         </div>
+                                                         </br>
+                                                          <div class="col-lg-2">
+                                                              <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;">Print</button>
+                                                         </div></br>
+                                                          <div class="col-lg-2">
+                                                              <button type="submit" class="btn btn-primary w-md" style="background-color: #258C38;">Submit</button>
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+                                                         <div class="col-lg-2">
+
+                                                         </div>
+
+                                                     </div>
+                                             </div>
+                                        </div>
+                                        <!-- button End -->
+
+                                    </div>
+                                    <!-- Card Body Start -->
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                        </form>
+                        <!-- Form End -->
+
+
+
+
+                    </div>
+                </div>
+
+                {% include 'footer.html' %}
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- form validation -->
+        <script src="{% static 'js/pages/form-validation.init.js' %}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+
+        <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        this.api().columns(0).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort0')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+
+
+    </body>
+</html>

@@ -1,0 +1,578 @@
+
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+         <title>User Creation | NIV-DAS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'images/nepl-logo.png' %}">
+
+        <!-- DataTables -->
+        <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+        <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+            type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"
+            rel="stylesheet" type="text/css" />
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% include 'sidebar-base.html' %}
+
+            {% include 'navbar-base.html' %}
+
+
+
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- breadcrumb -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">User Creation</h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                                            <li class="breadcrumb-item active">User Creation</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <!-- add and edit buttons -->
+                            <div class="card-header">
+                                <div style="float: right;">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target="#edit">Edit User
+                                    </button> &nbsp;&nbsp;
+                                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                                        data-bs-toggle="modal" data-bs-target="#register">Add User
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- edit popup -->
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                    aria-hidden="true" id="edit">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit User</h5>
+                                                <button type="button" class="btn-close"
+                                                    style="padding: 0rem 2rem; width: 2px"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <form method="POST" action="#" id="edit-form" class="needs-validation" novalidate>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="id" id="uid">
+                                                    <div data-repeater-list="outer-group" class="outer">
+                                                        <div data-repeater-item class="outer">
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Username<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input class="form-control" type="text" name="usr" id="username" list="userlist" placeholder="Enter name">
+                                                                    <datalist id="userlist" class="form-datalist-lg mb-5" aria-label=".form-datalist-lg example">
+                                                                        {% for i in alluser %}
+                                                                        <option>{{i.Username}}</option>
+                                                                        {% endfor %}
+                                                                    </datalist>
+                                                                    <!-- <input list="username" type="text" class="form-control" />
+                                                                    <datalist class="form-control" aria-label=".form-datalist-lg example" name = "u_name" id="username" required>
+                                                                        {% for i in alluser %}
+                                                                        <option>{{i.Username}}</option>
+                                                                        {% endfor %}
+                                                                    </datalist> -->
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <p> {{item}} </p> -->
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Group Name<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <select class="form-control" id="group-name" name="group_name" required>
+                                                                        <option value="" selected disabled>Select</option>
+                                                                        <option>GroupName</option>
+                                                                        {% for i in groups %}
+                                                                        <option>{{i.GroupName}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Department Name<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <select class="form-control" id="department-name" name="dept_name" required>
+                                                                        <option value="" selected disabled>Select</option>
+                                                                        <option>IT</option>
+                                                                        <option>QC</option>
+                                                                    </select>
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Status<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <select class="form-control" id="status1" name="status" required>
+                                                                        <option value="" selected disabled>Select</option>
+                                                                        <option>Active</option>
+                                                                        <option>Inactive</option>
+                                                                    </select>
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Password<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input class="form-control" type="Password" id="password" name = "pswd" placeholder="Enter Password" required>
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-4">
+                                                                <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
+                                                                <div class="col-lg-8">
+                                                                    <input class="form-control" type="text" id="password-change" name="passwdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
+                                                                    <div class="valid-feedback">
+                                                                        Looks good!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Looks bad!
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end">
+                                                        <div class="col-lg-12">
+                                                            <div style="float: right;">
+                                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Edit</button> &nbsp;&nbsp;
+                                                                <button class="btn btn-primary waves-effect waves-light" type="submit" onclick="clearEdit()">Clear</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            <!-- register popup -->
+                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                    aria-hidden="true" id="register">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add User</h5>
+                                        <button type="button" class="btn-close"
+                                            style="padding: 0rem 2rem; width: 2px"
+                                            data-bs-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form method="POST" action="#" id="add-form" class="needs-validation" novalidate>
+                                            {% csrf_token %}
+                                            <div data-repeater-list="outer-group" class="outer">
+                                                <div data-repeater-item class="outer">
+
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Username<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="username" placeholder="Enter Username" required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Group Name<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <select class="form-control" name="group" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option>GroupName</option>
+                                                                {% for i in groups  %}
+                                                                <option>{{i.GroupName}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Department Name<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <select class="form-control" name="department" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option>IT</option>
+                                                                <option>QC</option>
+                                                            </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Status<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <select class="form-control" name="status" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option>Active</option>
+                                                                <option>Inactive</option>
+                                                            </select>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Password<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="Password" name = "password" placeholder="Enter Password" required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label class="col-form-label col-lg-4">Password Change Duration(In days)<span style="color:red"> *</span></label>
+                                                        <div class="col-lg-8">
+                                                            <input class="form-control" type="text" name="PasswdChangeDuration" placeholder="Enter Password Change Duration(In days)" required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Looks bad!
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-lg-12">
+                                                    <div style="float: right;">
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit">Add</button> &nbsp;&nbsp;
+                                                        <button class="btn btn-primary waves-effect waves-light" type="button" onclick="clearAdd()">Clear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            <!-- user list table -->
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="table-responsive">
+                                                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" style="table-layout: auto">
+                                                    <thead id="header">
+                                                        <tr>
+                                                            <th>Username</th>
+                                                            <th>Status</th>
+                                                            <th>Group Name</th>
+                                                            <th>Days</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="sort0"></td>
+                                                            <td id="sort1"></td>
+                                                            <td id="sort2"></td>
+                                                            <td id="sort3"></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in alluser %}
+                                                            <tr>
+                                                                <td>{{i.Username}}</td>
+                                                                <td>{{i.status}}</td>
+                                                                <td>{{i.Group.GroupName}}</td>
+                                                                <td>{{i.PasswdChangeDuration}}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'libs/pace-js/pace.min.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <!-- form validation -->
+        <!-- <script src="{% static 'js/pages/form-validation.init.js' %}"></script> -->
+
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <!-- <script src="{% static 'js/pages/datatables.init.js' %}"></script> -->
+        <!-- <script src="{% static 'js/pages/custom-dt.init.js' %}"></script> -->
+
+        <script>
+            $(document).ready(function () {
+                $("#datatable").DataTable(),
+                $('#datatable-buttons thead tr')
+
+                var table = $('#datatable-buttons').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    lengthChange: !1,
+                    buttons: ["copy", "excel", "pdf", "colvis"],
+                    initComplete: function () {
+
+                        // this.api().columns(0).every(function () {
+                        //     var column = this;
+                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
+                        //         // .appendTo(myTable.header())
+                        //         .appendTo('#datatable-buttons thead tr #sort0')
+                        //         .on('change', function () {
+                        //             var val = $.fn.dataTable.util.escapeRegex(
+                        //                 $(this).val()
+                        //             );
+
+                        //             column
+                        //                 .search(val ? '^' + val + '$' : '', true, false)
+                        //                 .draw();
+                        //         });
+
+                        //     column.data().unique().sort().each(function (d, j) {
+                        //         select.append('<option value="' + d + '">' + d + '</option>')
+                        //     });
+                        // })
+
+                        this.api().columns(1).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort1')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        this.api().columns(2).every(function () {
+                            var column = this;
+                            var select = $(' <select class="form-select"><option value=""></option></select>')
+                                // .appendTo(myTable.header())
+                                .appendTo('#datatable-buttons thead tr #sort2')
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        })
+
+                        // this.api().columns(3).every(function () {
+                        //     var column = this;
+                        //     var select = $(' <select class="form-select"><option value=""></option></select>')
+                        //         // .appendTo(myTable.header())
+                        //         .appendTo('#datatable-buttons thead tr #sort3')
+                        //         .on('change', function () {
+                        //             var val = $.fn.dataTable.util.escapeRegex(
+                        //                 $(this).val()
+                        //             );
+
+                        //             column
+                        //                 .search(val ? '^' + val + '$' : '', true, false)
+                        //                 .draw();
+                        //         });
+
+                        //     column.data().unique().sort().each(function (d, j) {
+                        //         select.append('<option value="' + d + '">' + d + '</option>')
+                        //     });
+                        // })
+
+                    },
+                }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+                $(".dataTables_length select").addClass("form-select form-select-sm")
+            });
+        </script>
+
+        <!-- clear form -->
+        <script>
+            function clearAdd() {
+                document.getElementById("add-form").reset();
+            }
+        </script>
+
+        <!-- clear form -->
+        <script>
+            function clearEdit() {
+                document.getElementById("edit-form").reset();
+            }
+        </script>
+
+         <script>
+            // ,'#U_name'
+            $("#username").on("change",function(){
+                console.log("change")
+                var aid = this.value
+                // $(this).attr("data-uid");
+                console.log("UPdatebtn pREsseS",aid)
+
+                $.ajax
+                ({
+                    method : "GET",
+                    url : `/user-update-data/${aid}/`,
+
+                    success: function(response)
+                    {
+                        r = response.data;
+                        console.log(r);
+                        document.getElementById("uid").value = r[0].id;
+                        document.getElementById("username").value = r[0].name;
+                        document.getElementById("password").value = r[0].password;
+                        document.getElementById("group-name").value = r[0].grp_name;
+                        document.getElementById("department-name").value = r[0].dep_name;
+                        document.getElementById("status1").value = r[0].status;
+                        document.getElementById("password-change").value = r[0].cpassword;
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            !function(){
+                "use strict";
+                window.addEventListener("load",function(){
+                    var e=document.getElementsByClassName("needs-validation");
+                    Array.prototype.filter.call(e,function(t){
+                        t.addEventListener("submit",function(e){
+                            !1===t.checkValidity()&&(e.preventDefault(),e.stopPropagation()),
+                            t.classList.add("was-validated")
+                            // if (document.getElementsByClassName("form-control").length + document.getElementsByClassName("form-select").length-2 == 4) {
+                            // if ($(".invalid-feedback:visible").length == 0) {
+                            //     $('#modal').modal('show');
+                            // }
+                        },!1)
+                    })
+                },!1)
+            }()
+        </script>
+
+    </body>
+</html>
